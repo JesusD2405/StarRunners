@@ -1,0 +1,95 @@
+/* Iconos Materialize */
+
+@font-face{
+	font-family: 'Material Icons';
+	font-style: normal;
+	font-weight: 400;
+	src: url(../fonts/material-design-icons/MaterialIcons-Regular.eot);
+	src: local('Material Icons'),
+	local('MaterialIcons-Regular'),
+	url(../fonts/material-design-icons/MaterialIcons-Regular.woff2)format('woff2'),
+	url(../fonts/material-design-icons/MaterialIcons-Regular.woff)format('woff'),
+	url(../fonts/material-design-icons/MaterialIcons-Regular.ttf)format('ttf');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+
+body{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main{
+  flex: 1 0 auto;
+}
+
+html, body {
+  background: #347fc3;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.bar {
+  position: relative;
+  height: 2px;
+  width: 500px;
+  margin: 0 auto;
+  background: #fff;
+  margin-top: 150px;
+}
+
+.circle {
+  position: absolute;
+  top: -30px;
+  margin-left: -30px;
+  height: 60px;
+  width: 60px;
+  left: 0;
+  background: #fff;
+  border-radius: 30%;
+  -webkit-animation: move 5s infinite;
+}
+
+p {
+  position: absolute;
+  top: -35px;
+  right: -85px;
+  text-transform: uppercase;
+  color: #347fc3;
+  font-family: helvetica, sans-serif;
+  font-weight: bold;
+}
+
+@-webkit-keyframes move {
+  0% {left: 0;}
+  50% {left: 100%; -webkit-transform: rotate(450deg); width: 150px; height: 150px;}
+  75% {left: 100%; -webkit-transform: rotate(450deg); width: 150px; height: 150px;}
+  100 {right: 100%;}
+} 
+

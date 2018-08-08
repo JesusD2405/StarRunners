@@ -1,0 +1,49 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>StartRunners</title>
+
+		{% block css %}
+			<link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+			<link rel="stylesheet" href="{% static 'css/styleindex.css' %}">
+		{% endblock css %}
+
+	</head>
+	
+	<body>
+
+		{% block header %}
+			
+			{% include "simulation/_include/nabvar.html" %}
+
+		{% endblock header %}
+
+		{% block content %}
+
+			<h6> Contenido </h6>
+
+			<div class="bar">
+			  <div class="circle"></div>
+			  <p>Loading</p>
+			</div>
+		    
+		{% endblock content %}
+
+		{% block footer %}
+
+			{% include "simulation/_include/footer.html" %}
+		    
+		{% endblock footer %}
+
+		{% block js %}
+
+			<script src="{% static 'jquery/jquery.min.js' %}"></script>
+		    <script src="{% static 'js/materialize.min.js' %}"></script>
+		    <script src="{% static 'jquery/scriptIndex.js' %}"></script>
+
+		{% endblock js %}
+
+	</body>
+    
+</html>

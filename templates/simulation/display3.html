@@ -1,0 +1,334 @@
+{% extends "simulation/index.html" %}
+{% load staticfiles %}
+
+{% block css %}
+    
+    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style_runningTrack1.css' %}">
+
+{% endblock css %}
+
+{% block content %}
+
+	<div class="row">
+
+		<br><br>
+
+		<!-- Filas verticales -->
+		<div class="col s6 m6 l6">
+			<div class="row">
+				<div class="col s12 m12 l12" id="runningTrack">
+					<p class="white-text">Pista V</p>
+				</div>
+				<hr/>
+				<div class="col s12 m12 l12" id="runningTrack">
+					<p class="white-text">Pista V</p>
+				</div>
+				<hr/>
+				<div class="col s12 m12 l12" id="runningTrack">
+					<p class="white-text">Pista V</p>
+				</div>
+				<hr/>
+				<div class="col s12 m12 l12" id="runningTrack">
+					<p class="white-text">Pista V</p>
+				</div>
+				<hr/>
+				<div class="col s12 m12 l12" id="runningTrack">
+					<p class="white-text">Pista V</p>
+				</div>
+				<hr/>
+				<div class="col s12 m12 l12" id="runningTrack">
+					<p class="white-text">Pista V</p>
+				</div>
+				<hr/>
+				<div class="col s12 m12 l12" id="runningTrack">
+					<p class="white-text">Pista V</p>
+				</div>
+				<hr/>
+				<div class="col s12 m12 l12" id="runningTrack">
+					<p class="white-text">Pista V</p>
+				</div>
+				<hr/>
+				<div class="col s12 m12 l12" id="runningTrack">
+					<p class="white-text">Pista V</p>
+				</div>
+				<hr/>
+			</div>
+		</div>
+		<!-- End Filas verticales -->
+		
+		<!-- Filas Horizontales -->
+		<div class="col s6 m6 l6">
+			<div class="row">
+				<div class="col s12 m12 l12" id="runningTrack">
+					<p class="white-text">Pista H</p>
+				</div>
+				<hr/>
+				<div class="col s12 m12 l12" id="runningTrack">
+					<img src="{% static "img/gif/corredormod.gif" %}" style="max-width: 80px; margin-left: 110px; margin-bottom: 0px; margin-top: 0px;" id="runner1">
+					<p class="white-text">Pista H</p>
+				</div>
+				<hr/>
+				<div class="col s12 m12 l12" id="runningTrack">
+					<p class="white-text">Pista H</p>
+				</div>
+				<hr/>
+				<div class="col s12 m12 l12">
+					<p class="white-text">Pista H</p>
+				</div>
+				<hr/>
+				<div class="col s12 m12 l12">
+					<p class="white-text">Pista H</p>
+				</div>
+				<hr/>
+				<div class="col s12 m12 l12">
+					<p class="white-text">Pista H</p>
+				</div>
+				<hr/>
+				<div class="col s12 m12 l12" id="runningTrack">
+					<p class="white-text">Pista H</p>
+				</div>
+				<hr/>
+				<div class="col s12 m12 l12" id="runningTrack">
+					<p class="white-text">Pista H</p>
+				</div>
+				<hr/>
+				<div class="col s12 m12 l12" id="runningTrack">
+					<p class="white-text">Pista H</p>
+				</div>
+				<hr/>
+			</div>
+		</div>
+		<!-- End Filas Horizontales -->
+
+		
+
+	</div>
+
+	<!-- div class="container">
+		
+		<h4>Dibujar pista de carrera 3</h4>
+
+		<div class="row">
+			
+			<div class="input-field col s6 m6 l6">
+				
+				<input type="text" class="validate" id="chat-message-input">
+				<label for="chat-message-input">Escriba su mensaje aquí!!</label>
+
+			</div>
+
+			<div class="col s6 m6 l6">
+				
+				<h6>Mensajes: </h6>
+
+				<textarea id="chat-log" class="materialize-textarea" data-length="120"></textarea>
+				{# <label for="chat-log"></label> #}
+
+			</div>
+		</div>
+
+		<div class="row">
+					
+			<a class="waves-effect waves-light btn" type="button" value="Enter" id="pause"><i class="material-icons right">pause</i>Detener<a/> 
+
+			<a class="waves-effect waves-light btn" type="button" value="Enter" id="resume"><i class="material-icons right">restore</i>Reanudar<a/> 
+
+			{# <input id="room-name-submit" type="button" value="Enter"/> #}
+
+		</div>			
+
+	</div -->	
+{% endblock content %}
+
+{% block js %}
+
+	<script src="{% static 'jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+    <script src="{% static 'jquery/scriptIndex.js' %}"></script>
+
+    <script>
+
+	   /* Declaracion de variables */
+
+    	// Pantallas
+    	var display2 = false;
+	    var display3 = false;
+
+	    // Simulacion
+	    var runnerStart1 = false;
+	    var runnerPosX = 110;
+	    var runnerPosY = 0;
+	    var posX = true;
+	    var posY = true;
+	    var runnerDisplay = 1;
+
+    	setInterval(function(){runners()},15);
+	   	setInterval(function(){verificarConexion()},2000);
+	   	setInterval(function(){verificarConectividad()},3000);
+
+	   	/* Funciones de la simulacion */
+
+	    function runners()
+	    {
+	    	// Movimiento Eje X
+	    	if ((runnerPosX>-164 && runnerStart1===true) && posX===true)
+	    	{
+	    		//alert('Aja');
+	    		runnerPosX-= 1;
+	    		$("#runner1").css("margin-left", runnerPosX);
+	    		//$("#track1").hide();
+
+	    		// Movimiento Eje Y
+		    	if (runnerPosX == -164)
+		    	{
+		    		$("#runner1").css("margin-top", -500);
+		    		$("#runner1").css("margin-bottom", -57);
+		    		posX= false;
+		    	}
+	    	}
+
+	    	// Movimiento Eje Y
+	    	if ((runnerPosY>-415 && runnerPosX==-164) && posY===true)
+	    	{
+	    		runnerPosY-= 1;
+
+	    		$("#runner1").css("margin-bottom", runnerPosY);
+	    		//$("#track1").hide();
+
+	    		if (runnerPosY == -415)
+		    	{
+		    		posY= false;
+		    	}
+	    	}
+
+	    	// Movimiento Eje X
+	    	if ((runnerPosX<143 && runnerPosY==-415) && posX===false)
+	    	{
+	    		runnerPosX += 1;
+
+	    		$("#runner1").css("margin-left", runnerPosX);
+
+	    		if (runnerPosX==143)
+	    		{
+	    			chatSocket.send(JSON.stringify({
+		            	'message': 'runner1 display1',
+			        }));
+
+	    			$("#runner1").hide();	
+	    		}
+	    	}
+	    }
+
+	    /* Funciones de WebSocket */
+
+	    function verificarConexion(){
+
+	    	//document.querySelector('#chat-log').value += ('Soy la pantalla 2.. \n');
+
+	    	chatSocket.send(JSON.stringify({
+	            'message': '3'
+	        }));
+
+	    }
+
+	    var chatSocket = new WebSocket(
+	        'ws://' + window.location.host +
+	        '/ws/simulation/start/display/');
+
+	    var display1 = false;
+	    var display2 = false;
+
+	    chatSocket.onmessage = function(e) {
+	        var data = JSON.parse(e.data);
+	        var message = data['message'];
+
+	        switch(message)
+	        {
+	        	case '1':
+	        			display1 = true;
+	        		break;
+
+	        	case '2':
+	        			display2 = true;
+	        		break;
+
+	        	case '3':
+        				//Todo en orden
+        				$('#chat-log').val('');
+        				$('chat-log').empty();
+	        		break;
+
+	        	default:
+
+	        			if (message == 'runner1 display3')
+	        			{
+	        				//$("#runner1").hide();
+	        				runnerStart1= true;
+	        				//runners();
+	        			}
+
+	        			document.querySelector('#chat-log').value += (message);
+	        		break;
+	        }
+
+	        //document.querySelector('#chat-log').value += (message);
+	    };
+
+	    function verificarConectividad()
+	    {
+	    	if (display1==false)
+	    	{
+	    		$.get("http://127.0.0.1:8000/simulation/disconnect/display/1");
+	    		
+	    		chatSocket.send(JSON.stringify({
+		            'message': 'Pantalla 1 no conectada!'
+		        }));
+	    	}
+
+	    	if (display2==false)
+	    	{
+	    		$.get("http://127.0.0.1:8000/simulation/disconnect/display/2")
+
+	    		chatSocket.send(JSON.stringify({
+		            'message': 'Pantalla 2 no conectada!'
+		        }));
+	    	}
+
+	    	display1 = false;
+		    display2 = false;
+	    }
+
+	    chatSocket.onclose = function(e) {
+	        console.error('Chat socket closed unexpectedly');
+	    };
+
+	    document.querySelector('#chat-message-input').focus();
+	    document.querySelector('#chat-message-input').onkeyup = function(e) {
+	        if (e.keyCode === 13) {  // enter, return
+	            document.querySelector('#chat-message-submit').click();
+	        }
+	    };
+
+	    document.querySelector('#pause').onclick = function(e) {
+	        var messageInputDom = document.querySelector('#chat-message-input');
+	        var message = messageInputDom.value;
+	        chatSocket.send(JSON.stringify({
+	            'message': message
+	        }));
+
+	        messageInputDom.value = '';
+	    };
+
+	    document.querySelector('#resume').onclick = function(e) {
+	        var messageInputDom = document.querySelector('#chat-message-input');
+	        var message = messageInputDom.value;
+	        chatSocket.send(JSON.stringify({
+	            'message': message
+	        }));
+
+	        messageInputDom.value = '';
+	    };
+	</script>
+  
+{% endblock js %}

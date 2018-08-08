@@ -1,0 +1,35 @@
+{% extends "simulation/index.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+	<div class="container">
+		
+		<h4>Todo listo!!</h4>
+
+		<br>
+
+		<p>Empezamos con la simulacion.. Recuerda conectar las pantallas restantes.</p>
+
+		
+
+		<div class="row">
+					
+			<a class="waves-effect waves-light btn" type="button" value="Enter" id="room-name-submit"><i class="material-icons right">send</i>Enviar<a/>
+
+			<!-- input id="room-name-submit" type="button" value="Enter"/ -->
+
+		</div>		
+
+	</div>	
+
+{% endblock content %}
+
+{% block js %}
+
+	<script src="{% static 'jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+    <script src="{% static 'jquery/scriptIndex.js' %}"></script>
+    <script src="{% static 'js/scripts_newSimulation.js' %}"></script>
+  
+{% endblock js %}
