@@ -152,8 +152,8 @@
 	   /* Declaracion de variables */
 
     	// Pantallas
+    	var display1 = false;
     	var display2 = false;
-	    var display3 = false;
 
 	    // Simulacion
 	    var runnerStart1 = false;
@@ -235,9 +235,6 @@
 	    var chatSocket = new WebSocket(
 	        'ws://' + window.location.host +
 	        '/ws/simulation/start/display/');
-
-	    var display1 = false;
-	    var display2 = false;
 
 	    chatSocket.onmessage = function(e) {
 	        var data = JSON.parse(e.data);
