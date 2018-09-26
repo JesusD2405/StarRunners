@@ -29,6 +29,7 @@
 	    	if ((runnerPosX>-150 && runnerStart1===true) && posX===true)
 	    	{
 	    		//alert('Aja');
+	    		$("#runnerR").hide();
 	    		if (runnerPosX == 110)
 	    		{
 		    		$("#runner1").css("transform", "rotate(-180deg)");

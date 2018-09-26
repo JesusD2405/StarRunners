@@ -8,6 +8,7 @@
 	    var runnerPos = 0;
 	    var runnerDisplay = 1;
 	    var posX = true;
+	    var runnerStar = false;
 
 	    // 
 
@@ -23,6 +24,9 @@
 
 	    function runners()
 	    {
+    		$("#iniciar").on("click", function() {
+    			runnerStar = true;
+    		});
 
 	    	if (runnerPos == 0)
 	    	{
@@ -31,7 +35,7 @@
 
 	    	/* Movimiento Eje X (->)  ida */
 
-	    	if (runnerPos<388 && posX===true)
+	    	if (runnerPos<388 && posX===true && runnerStar == true)
 	    	{
 	    		$("#runner1").css("margin-left", runnerPos);
 	    		//$("#track1").hide();
@@ -43,6 +47,7 @@
 
 	    	if (runnerPos>-44 && posX===false)
 	    	{
+	    		$("#runnerR").hide();
 	    		runnerPos-= 1;
 
 	    		$("#runner1_1").css("margin-left", runnerPos);

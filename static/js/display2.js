@@ -28,6 +28,7 @@
 	    	// Movimiento Eje X
 	    	if ((runnerPosX<300 && runnerStart1===true) && posX===true)
 	    	{
+	    		$("#runnerR").hide();
 	    		$("#runner1").css("margin-left", runnerPosX);
 	    		$("#runner1").css("display", "initial");
 	    		//$("#track1").hide();
