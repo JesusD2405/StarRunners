@@ -9,6 +9,10 @@
 	    var runnerStart1 = false;
 	    var runnerPosX = 0;
 	    var runnerPosY = 0;
+	    var runnerRotX = 259;
+	    var runnerRot1 = -30;
+	    var runnerRotY = 210;
+	    var runnerRot2 = -120;
 	    var posX = true;
 	    var posY = true;
 	    var runnerDisplay = 1;
@@ -22,37 +26,60 @@
 	    function runners()
 	    {
 	    	// Movimiento Eje X
-	    	if ((runnerPosX<248 && runnerStart1===true) && posX===true)
+	    	if ((runnerPosX<300 && runnerStart1===true) && posX===true)
 	    	{
 	    		$("#runner1").css("margin-left", runnerPosX);
+	    		$("#runner1").css("display", "initial");
 	    		//$("#track1").hide();
 
 	    		runnerPosX+= 1;
 
 	    		// Movimiento Eje Y
-		    	if (runnerPosX == 248)
+		    	if (runnerPosX == 300)
 		    	{
 		    		$("#runner1").css("margin-top", -500);
 		    		posX= false;
 		    	}
 	    	}
 
+	    	// Movimiento Eje Y. Rotacion 1 - Esquina inferior
+	    	if ((runnerPosY<250 && runnerPosX==runnerRotX) && posY===true)
+	    	{
+	    		$("#runner1").css("transform", "rotate("+runnerRot1+"deg)");
+	    		$("#runner1").css("-ms-transform", "rotate("+runnerRot1+"deg)");
+	    		$("#runner1").css("-webkit-transform", "rotate("+runnerRot1+"deg)");
+
+	    		runnerRotX += 10;
+	    		runnerRot1 += -15;
+	    	}
+
 	    	// Movimiento Eje Y
-	    	if ((runnerPosY<303 && runnerPosX==248) && posY===true)
+	    	if ((runnerPosY<250 && runnerPosX==300) && posY===true)
 	    	{
 	    		$("#runner1").css("margin-bottom", runnerPosY);
 	    		//$("#track1").hide();
 
 	    		runnerPosY+= 1;
 
-	    		if (runnerPosY == 303)
+	    		if (runnerPosY == 250)
 		    	{
 		    		posY= false;
 		    	}
 	    	}
 
+	    	// Movimiento Eje X. Rotacion 2 - Esquina superior
+	    	if ((runnerPosX>-19 && runnerPosY==runnerRotY) && posX===false)
+	    	{
+	    		$("#runner1").css("transform", "rotate("+runnerRot2+"deg)");
+	    		$("#runner1").css("-ms-transform", "rotate("+runnerRot2+"deg)");
+	    		$("#runner1").css("-webkit-transform", "rotate("+runnerRot2+"deg)");
+
+	    		runnerRotY += 10;
+	    		runnerRot2 += -15;
+	    	}
+
 	    	// Movimiento Eje X
-	    	if ((runnerPosX>-19 && runnerPosY==303) && posX===false)
+	    	if ((runnerPosX>-19 && runnerPosY==250) && posX===false)
 	    	{
 	    		runnerPosX -= 1;
 

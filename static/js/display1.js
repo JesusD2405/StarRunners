@@ -46,6 +46,10 @@
 	    		runnerPos-= 1;
 
 	    		$("#runner1_1").css("margin-left", runnerPos);
+	    		$("#runner1_1").css("display", "initial");
+	    		$("#runner1_1").css("transform", "rotate(-180deg)");
+	    		$("#runner1_1").css("-ms-transform", "rotate(-180deg)");
+	    		$("#runner1_1").css("-webkit-transform", "rotate(-180deg)");
 	    		
 
 	    		if (runnerPos==-44)
