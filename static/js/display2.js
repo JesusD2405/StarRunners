@@ -5,17 +5,19 @@
     	var display2 = false;
 	    var display3 = false;
 
-	    // Simulacion
+	    // Movimiento de la simulacion
 	    var runnerStart1 = false;
 	    var runnerPosX = 0;
 	    var runnerPosY = 0;
+	    var posX = true;
+	    var posY = true;
+	    var runnerDisplay = 1;
+	    
+	    // Rotacion de la simulacion
 	    var runnerRotX = 259;
 	    var runnerRot1 = -30;
 	    var runnerRotY = 210;
 	    var runnerRot2 = -120;
-	    var posX = true;
-	    var posY = true;
-	    var runnerDisplay = 1;
 
     	setInterval(function(){runners()},15);
 	   	setInterval(function(){verificarConexion()},2000);
@@ -26,11 +28,15 @@
 	    function runners()
 	    {
 	    	// Movimiento Eje X
+	    	if ((runnerPosX==0 && runnerStart1===true) && posX===true)
+	    	{
+	    		$(".runnersR").hide();
+	    		$(".runners").css("display", "initial");
+	    	}
+
 	    	if ((runnerPosX<300 && runnerStart1===true) && posX===true)
 	    	{
-	    		$("#runnerR").hide();
-	    		$("#runner1").css("margin-left", runnerPosX);
-	    		$("#runner1").css("display", "initial");
+	    		$(".runners").css("margin-left", runnerPosX);
 	    		//$("#track1").hide();
 
 	    		runnerPosX+= 1;
@@ -38,7 +44,7 @@
 	    		// Movimiento Eje Y
 		    	if (runnerPosX == 300)
 		    	{
-		    		$("#runner1").css("margin-top", -500);
+		    		$(".runners").css("margin-top", -500);
 		    		posX= false;
 		    	}
 	    	}
@@ -46,9 +52,9 @@
 	    	// Movimiento Eje Y. Rotacion 1 - Esquina inferior
 	    	if ((runnerPosY<250 && runnerPosX==runnerRotX) && posY===true)
 	    	{
-	    		$("#runner1").css("transform", "rotate("+runnerRot1+"deg)");
-	    		$("#runner1").css("-ms-transform", "rotate("+runnerRot1+"deg)");
-	    		$("#runner1").css("-webkit-transform", "rotate("+runnerRot1+"deg)");
+	    		$(".runners").css("transform", "rotate("+runnerRot1+"deg)");
+	    		$(".runners").css("-ms-transform", "rotate("+runnerRot1+"deg)");
+	    		$(".runners").css("-webkit-transform", "rotate("+runnerRot1+"deg)");
 
 	    		runnerRotX += 10;
 	    		runnerRot1 += -15;
@@ -57,7 +63,7 @@
 	    	// Movimiento Eje Y
 	    	if ((runnerPosY<250 && runnerPosX==300) && posY===true)
 	    	{
-	    		$("#runner1").css("margin-bottom", runnerPosY);
+	    		$(".runners").css("margin-bottom", runnerPosY);
 	    		//$("#track1").hide();
 
 	    		runnerPosY+= 1;
@@ -71,9 +77,9 @@
 	    	// Movimiento Eje X. Rotacion 2 - Esquina superior
 	    	if ((runnerPosX>-19 && runnerPosY==runnerRotY) && posX===false)
 	    	{
-	    		$("#runner1").css("transform", "rotate("+runnerRot2+"deg)");
-	    		$("#runner1").css("-ms-transform", "rotate("+runnerRot2+"deg)");
-	    		$("#runner1").css("-webkit-transform", "rotate("+runnerRot2+"deg)");
+	    		$(".runners").css("transform", "rotate("+runnerRot2+"deg)");
+	    		$(".runners").css("-ms-transform", "rotate("+runnerRot2+"deg)");
+	    		$(".runners").css("-webkit-transform", "rotate("+runnerRot2+"deg)");
 
 	    		runnerRotY += 10;
 	    		runnerRot2 += -15;
@@ -84,7 +90,7 @@
 	    	{
 	    		runnerPosX -= 1;
 
-	    		$("#runner1").css("margin-left", runnerPosX);
+	    		$(".runners").css("margin-left", runnerPosX);
 
 	    		if (runnerPosX==-18)
 	    		{
@@ -92,7 +98,7 @@
 		            	'message': 'runner1 display1',
 			        }));
 
-	    			$("#runner1").hide();	
+	    			$(".runners").hide();	
 	    		}
 	    	}
 	    }

@@ -26,6 +26,8 @@
 	    {
     		$("#iniciar").on("click", function() {
     			runnerStar = true;
+    			$(".runnersR1").hide();
+    			$(".runners").css("display", "initial");
     		});
 
 	    	if (runnerPos == 0)
@@ -37,7 +39,7 @@
 
 	    	if (runnerPos<388 && posX===true && runnerStar == true)
 	    	{
-	    		$("#runner1").css("margin-left", runnerPos);
+	    		$(".runners").css("margin-left", runnerPos);
 	    		//$("#track1").hide();
 
 	    		runnerPos+= 1;
@@ -45,24 +47,27 @@
 
 	    	/* Movimiento Eje X (<-)  vuelta */
 
+	    	if (runnerPos==387 && posX===false)
+	    	{
+	    		$(".runnerR2").hide();
+	    		$(".runners2").css("display", "initial");
+	    		$(".runners2").css("transform", "rotate(-180deg)");
+	    		$(".runners2").css("-ms-transform", "rotate(-180deg)");
+	    		$(".runners2").css("-webkit-transform", "rotate(-180deg)");
+	    	}
+
 	    	if (runnerPos>-44 && posX===false)
 	    	{
-	    		$("#runnerR").hide();
 	    		runnerPos-= 1;
 
-	    		$("#runner1_1").css("margin-left", runnerPos);
-	    		$("#runner1_1").css("display", "initial");
-	    		$("#runner1_1").css("transform", "rotate(-180deg)");
-	    		$("#runner1_1").css("-ms-transform", "rotate(-180deg)");
-	    		$("#runner1_1").css("-webkit-transform", "rotate(-180deg)");
-	    		
+	    		$(".runners2").css("margin-left", runnerPos);
 
 	    		if (runnerPos==-44)
 	    		{
 	    			chatSocket.send(JSON.stringify({
 			            'message': 'runner1 display3',
 			        }));
-	    			$("#runner1_1").hide();
+	    			$(".runners2").hide();
 	    		}
 
 	    	}
@@ -75,7 +80,7 @@
 		            'message': 'runner1 display2',
 		        }));
 
-		        $("#runner1").hide();
+		        $(".runners").hide();
 		        //$("#track1").show();
 	    	}
 

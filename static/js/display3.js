@@ -5,17 +5,19 @@
     	var display2 = false;
 	    var display3 = false;
 
-	    // Simulacion
+	    // Movimiento de la simulacion
 	    var runnerStart1 = false;
 	    var runnerPosX = 110;
 	    var runnerPosY = -49;
+	    var posX = true;
+	    var posY = true;
+	    var runnerDisplay = 1;
+
+	    // Rotacion de la simulacion
 	    var runnerRotX = -99;
 	    var runnerRot1 = -195;
 	    var runnerRotY = -300;
 	    var runnerRot2 = -285;
-	    var posX = true;
-	    var posY = true;
-	    var runnerDisplay = 1;
 
     	setInterval(function(){runners()},15);
 	   	setInterval(function(){verificarConexion()},2000);
