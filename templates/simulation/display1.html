@@ -16,7 +16,7 @@
 			
 			<div class="col s12 m12 l12" id="runningTrack">
 				<img src="{% static "img/gif/modificado_gif/corredormod.gif" %}" style="max-width: 80px; margin-left: 330px; display: none;" class="runners2">
-				<img src="{% static "img/corredor_reposo.gif" %}" style="max-width: 80px; max-height: 70px; margin-left: 330px; transform: rotate(-180deg); -ms-transform: rotate(-180deg); -webkit-transform: rotate(-180deg);" class="runnerR2">
+				<img src="{% static "img/corredor_reposo.gif" %}" style="max-width: 24px; max-height: 70px; margin-left: 330px; transform: rotate(-180deg); -ms-transform: rotate(-180deg); -webkit-transform: rotate(-180deg);" class="runnerR2">
 				<p class="white-text">Pista H</p>
 			</div>
 
@@ -24,7 +24,7 @@
 
 			<div class="col s12 m12 l12" id="runningTrack">
 				<img src="{% static "img/gif/modificado_gif/corredormod.gif" %}" style="max-width: 80px; margin-left: 330px; display: none;" class="runners2">
-				<img src="{% static "img/corredor_reposo.gif" %}" style="max-width: 80px; max-height: 70px; margin-left: 330px; transform: rotate(-180deg); -ms-transform: rotate(-180deg); -webkit-transform: rotate(-180deg);" class="runnerR2">
+				<img src="{% static "img/corredor_reposo.gif" %}" style="max-width: 24px; max-height: 70px; margin-left: 330px; transform: rotate(-180deg); -ms-transform: rotate(-180deg); -webkit-transform: rotate(-180deg);" class="runnerR2">
 				<p class="white-text">Pista H</p>
 			</div>
 
@@ -32,7 +32,7 @@
 
 			<div class="col s12 m12 l12" id="runningTrack">
 				<img src="{% static "img/gif/modificado_gif/corredormod.gif" %}" style="max-width: 80px; margin-left: 330px; display: none;" class="runners2">
-				<img src="{% static "img/corredor_reposo.gif" %}" style="max-width: 80px; max-height: 70px; margin-left: 330px; transform: rotate(-180deg); -ms-transform: rotate(-180deg); -webkit-transform: rotate(-180deg);" class="runnerR2">
+				<img src="{% static "img/corredor_reposo.gif" %}" style="max-width: 24px; max-height: 70px; margin-left: 330px; transform: rotate(-180deg); -ms-transform: rotate(-180deg); -webkit-transform: rotate(-180deg);" class="runnerR2">
 				<p class="white-text">Pista H</p>
 			</div>
 			
@@ -56,13 +56,13 @@
 				<div class="reloj" id="Segundos">:00</div>
 			</div -->
 			<div class="col s12 m12 l12 center-align">
-				<button type="button" class="waves-effect waves-light btn" id="iniciar">Iniciar</button>
+				<button type="button" class="green waves-effect waves-light btn" id="iniciar" title="Play runner" style="cursor: pointer;"><i class="material-icons">directions_run</i></button>
+				<button type="button" class="red waves-effect waves-light btn" id="detener" title="Stop runner" style="cursor: pointer;"><i class="material-icons">directions_walk</i></button>
 			</div>
 
 			<hr/>
 
 			<div class="col s12 m12 l12">
-				<!-- img src="{% static "img/gif/corredormod.gif" %}" style="max-width: 80px; margin-left: 0px;" id="runner1" -->
 				<p class="white-text">Pista H</p>
 			</div>
 			
@@ -70,7 +70,7 @@
 
 			<div class="col s12 m12 l12" id="runningTrack">
 				<img src="{% static "img/gif/modificado_gif/corredormod.gif" %}" style="max-width: 80px; margin-left: 0px; display: none;" class="runners">
-				<img src="{% static "img/corredor_reposo.gif" %}" style="max-width: 80px; max-height: 70px; margin-left: 0px;" class="runnersR1">
+				<img src="{% static "img/corredor_reposo.gif" %}" style="max-width: 24px; max-height: 70px; margin-left: 0px;" class="runnersR1">
 				<p class="white-text">Pista H</p>
 			</div>
 
@@ -78,7 +78,7 @@
 
 			<div class="col s12 m12 l12" id="runningTrack">
 				<img src="{% static "img/gif/modificado_gif/corredormod.gif" %}" style="max-width: 80px; margin-left: 0px; display: none;" class="runners">
-				<img src="{% static "img/corredor_reposo.gif" %}" style="max-width: 80px; max-height: 70px; margin-left: 0px;" class="runnersR1">
+				<img src="{% static "img/corredor_reposo.gif" %}" style="max-width: 24px; max-height: 70px; margin-left: 0px;" class="runnersR1">
 					<p class="white-text" >Pista H</p>
 			</div>
 
@@ -86,11 +86,9 @@
 
 			<div class="col s12 m12 l12" id="runningTrack">
 				<img src="{% static "img/gif/modificado_gif/corredormod.gif" %}" style="max-width: 80px; margin-left: 0px; display: none;" class="runners">
-				<img src="{% static "img/corredor_reposo.gif" %}" style="max-width: 80px; max-height: 70px; margin-left: 0px;" class="runnersR1">
+				<img src="{% static "img/corredor_reposo.gif" %}" style="max-width: 24px; max-height: 70px; margin-left: 0px;" class="runnersR1">
 				<p class="white-text">Pista H</p>
 			</div>
-
-
 
 		</div>
 
@@ -135,6 +133,22 @@
 		</div>
 
 	</div-->
+
+	<!-- Modal Trigger -->
+	<!--a class="waves-effect waves-light btn modal-trigger" href="#DisplayDisconnect">Modal</a -->
+
+	<!-- Modal Structure -->
+	<div id="DisplayDisconnect" class="modal">
+		<div class="modal-content">
+			<h4 class="red-text center-align"><i class="material-icons red-text">desktop_access_disabled</i> Pantallas Desconectadas!</h4>
+			<br>
+			<h6>Se ha detectado la inactividad de la pantalla<h5 id="display red-text"></h5></h6>
+
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="modal-close waves-effect waves-green btn-flat">Aceptar <i class="material-icons green-text">done</i></a>
+		</div>
+	</div>
 
 	<br>
 

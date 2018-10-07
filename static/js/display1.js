@@ -8,11 +8,65 @@
 	    var runnerPos = 0;
 	    var runnerDisplay = 1;
 	    var posX = true;
-	    var runnerStar = false;
+	    var runnerStart= false;
 
-	    // 
+	    // Jquery
 
-	    // Corredores
+	    $(document).ready(function()
+	    {
+	    	// Inicializacion de la ventana modal
+	    	$('.modal').modal();
+
+		    /* Acción Iniciar */
+
+			$("#iniciar").click(function(){
+
+				runnerStart = true;
+
+				if (posX===true)
+				{
+					$(".runnersR1").hide();
+				}
+				
+				if(runnerPos>-44 && posX===false) 
+				{
+					$(".runnersR2").hide();
+				}
+
+				$(".runners").css("display", "initial");
+
+				// Replicamos la acción
+				chatSocket.send(JSON.stringify({
+		            'message': 'Play'
+		        }));
+			});
+
+
+			/* Acción Detener */
+
+			$("#detener").click(function(){
+
+				runnerStart = false;
+
+				if (posX===true)
+				{
+					$(".runnersR1").show();
+				}
+
+				if(runnerPos>-44 && posX===false) 
+				{
+					$(".runnersR2").show();
+				}
+
+				$(".runners").css("display", "none");
+
+				// Replicamos la acción
+				chatSocket.send(JSON.stringify({
+		            'message': 'Stop'
+		        }));
+
+			});
+		});
 	  
 	    /* Funciones que se ejecutan segun un tiempo determinado */
 
@@ -20,82 +74,83 @@
 	    setInterval(function(){verificarConexion()},2000);
 	    setInterval(function(){verificarConectividad()},3000);
 
+
 	    /* Funciones de la simulacion */
 
 	    function runners()
 	    {
-    		$("#iniciar").on("click", function() {
-    			runnerStar = true;
-    			$(".runnersR1").hide();
-    			$(".runners").css("display", "initial");
-    		});
+	    	//console.log('Accion: '+ runnerStart);
 
-	    	if (runnerPos == 0)
-	    	{
-	    		//inicio();
-	    	}
+	    	// Verificamos si la acción de la simulación está activada
 
-	    	/* Movimiento Eje X (->)  ida */
+			if (runnerStart===true) 
+			{
+				/* Movimiento Eje X (->)  ida */
 
-	    	if (runnerPos<388 && posX===true && runnerStar == true)
-	    	{
-	    		$(".runners").css("margin-left", runnerPos);
-	    		//$("#track1").hide();
+		    	if (runnerPos<388 && posX===true)
+		    	{
+		    		$(".runners").css("margin-left", runnerPos);
+		    		$(".runnersR1").css("margin-left", runnerPos);
+		    		//$("#track1").hide();
 
-	    		runnerPos+= 1;
-	    	}
+		    		runnerPos+= 1;
 
-	    	/* Movimiento Eje X (<-)  vuelta */
+		    		console.log('otto man');
+		    	}
 
-	    	if (runnerPos==387 && posX===false)
-	    	{
-	    		$(".runnerR2").hide();
-	    		$(".runners2").css("display", "initial");
-	    		$(".runners2").css("transform", "rotate(-180deg)");
-	    		$(".runners2").css("-ms-transform", "rotate(-180deg)");
-	    		$(".runners2").css("-webkit-transform", "rotate(-180deg)");
-	    	}
+		    	/* Movimiento Eje X (<-)  vuelta */
 
-	    	if (runnerPos>-44 && posX===false)
-	    	{
-	    		runnerPos-= 1;
+		    	if (runnerPos==387 && posX===false)
+		    	{
+		    		$(".runnerR2").hide();
+		    		$(".runners2").css("display", "initial");
+		    		$(".runners2").css("transform", "rotate(-180deg)");
+		    		$(".runners2").css("-ms-transform", "rotate(-180deg)");
+		    		$(".runners2").css("-webkit-transform", "rotate(-180deg)");
+		    	}
 
-	    		$(".runners2").css("margin-left", runnerPos);
 
-	    		if (runnerPos==-44)
-	    		{
-	    			chatSocket.send(JSON.stringify({
-			            'message': 'runner1 display3',
+		    	if (runnerPos>-44 && posX===false)
+		    	{
+		    		runnerPos-= 1;
+
+		    		$(".runners2").css("margin-left", runnerPos);
+		    		$(".runnerR2").css("margin-left", runnerPos);
+
+		    		if (runnerPos==-44)
+		    		{
+		    			chatSocket.send(JSON.stringify({
+				            'message': 'runner1 display3',
+				        }));
+		    			$(".runners2").hide();
+		    		}
+		    	}
+
+
+		    	if (runnerDisplay == 1 && runnerPos == 387)
+		    	{
+		    		runnerDisplay = 2;
+
+		    		chatSocket.send(JSON.stringify({
+			            'message': 'runner1 display2',
 			        }));
-	    			$(".runners2").hide();
-	    		}
 
-	    	}
-
-	    	if (runnerDisplay == 1 && runnerPos == 387)
-	    	{
-	    		runnerDisplay = 2;
-
-	    		chatSocket.send(JSON.stringify({
-		            'message': 'runner1 display2',
-		        }));
-
-		        $(".runners").hide();
-		        //$("#track1").show();
-	    	}
+			        $(".runnersR1").remove();
+			        $(".runners").remove();
+		    	}
+			}
 
 	    }
 
 	    /* Funciones WebSocket */
 
-	    function verificarConexion(){
-
+	    function verificarConexion()
+	    {
 	    	//document.querySelector('#chat-log').value += ('Soy la pantalla 1. \n');
 
 	    	chatSocket.send(JSON.stringify({
 	            'message': '1'
 	        }));
-
 	    }
 
 	    var chatSocket = new WebSocket(
@@ -104,7 +159,8 @@
 
 	    
 
-	    chatSocket.onmessage = function(e) {
+	    chatSocket.onmessage = function(e)
+	    {
 	        var data = JSON.parse(e.data);
 	        var message = data['message'];
 
@@ -134,7 +190,8 @@
 	        				//runners();
 	        			}
 
-	        			document.querySelector('#chat-log').value += (message);
+	        			//document.querySelector('#chat-log').value += (message);
+
 	        		break;
 	        }
 
@@ -143,9 +200,23 @@
 
 	    function verificarConectividad()
 	    {
-
-	    	if (display2==false)
+	    	if (display2==true && display3==true)
 	    	{
+	    		$('#DisplayDisconnect').modal('close');
+	    	}
+
+
+	    	if (display2===false)
+	    	{
+	    		$('#DisplayDisconnect').modal('open');
+
+	    		console.log($('#display').html());
+
+	    		if ($('#display').text()!=2)
+	    		{
+	    			$('#display').append('2');
+	    		}
+
 	    		$.get("http://127.0.0.1:8000/simulation/disconnect/display/2");
 
 	    		chatSocket.send(JSON.stringify({
@@ -153,8 +224,15 @@
 		        }));
 	    	}
 
-	    	if (display3==false)
+	    	if (display3===false)
 	    	{
+	    		$('#DisplayDisconnect').modal('open');
+
+	    		if ($('#display').text()!=3)
+	    		{
+	    			$('#display').append('3');
+	    		}
+
 	    		$.get("http://127.0.0.1:8000/simulation/disconnect/display/3");
 
 	    		chatSocket.send(JSON.stringify({
@@ -266,5 +344,6 @@
 				if (horas < 10) { horas = "0"+horas }
 				//Horas.innerHTML = horas;
 			}
+		}
 		*/
 		
