@@ -1,0 +1,3 @@
+# Ignorar configuraciones locales de la BD
+
+/StarRunners/settings.py
