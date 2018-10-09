@@ -9,6 +9,15 @@
 	    var runnerStart  = false;
 	    var runnerStatus = false;
 	    var runnerPosX = 0;
+	    //Posición de los corredores en el eje X
+	    var posX_R1 = 0;
+		var posX_R2 = 0;
+		var posX_R3 = 0;
+		//Posición de los corredores en el eje Y
+	    var posY_R1 = 0;
+		var posY_R2 = 0;
+		var posY_R3 = 0;
+
 	    var runnerPosY = 0;
 	    var runnerMaxPosX1 = 350;
 	    var runnerMaxPosY = 300;
@@ -44,8 +53,8 @@
 		});
 
     	setInterval(function(){runners()},15);
-	   	setInterval(function(){verificarConexion()},2000);
-	   	setInterval(function(){verificarConectividad()},3000);
+	   	setInterval(function(){verificarConexion()},1500);
+	   	setInterval(function(){verificarConectividad()},2000);
 
 	   	/* Funciones de la simulacion */
 
@@ -54,44 +63,71 @@
 	    	// Mostrar corredores en movimiento
 	    	if (runnerStart===true && runnerStatus===true)
 	    	{
-	    		$(".runnersR").hide();
-	    		$(".runners").css("display", "initial");
+	    		$("#runnerR1").hide();
+	    		$("#runnerR2").hide();
+	    		$("#runnerR3").hide();
+	    		$("#runner1").css("display", "initial");
+	    		$("#runner2").css("display", "initial");
+	    		$("#runner3").css("display", "initial");
 	    	
+	    				/* Movimiento Eje X (->) ida */
 
-	    		// Movimiento Eje X
-		    	if (runnerPosX<runnerMaxPosX1 && (pos1X===true || pos2X===true || pos3X===true))
+	    		// Corredor 1
+	    		if (posX_R1>0 && pos1X===true)
 		    	{
-		    		//$(".runners").css("margin-left", runnerPosX);
-		    		//$("#track1").hide();
-		    		if (pos1X===true) $("#runner1").css("margin-left", runnerPosX);
-		    		if (pos2X===true) $("#runner2").css("margin-left", runnerPosX);
-		    		if (pos3X===true) $("#runner3").css("margin-left", runnerPosX);
-
-		    		runnerPosX+= 1;
+		    		// Posición.. Determinada por la velocidad ramdon en px 
+					posX_R1+= getRandomInt(1,5);
+		    		
+		    		$("#runner1").css("margin-left", posX_R1);
+		    		$("#runnerR1").css("margin-left", posX_R1+8);
 
 		    		// Finalizar movimiento Eje X
-			    	if ((runnerPosX == (runnerMaxPosX1-100)) && pos1X===true)
+			    	if (posX_R1 >= (runnerMaxPosX1-100))
 			    	{
 			    		$("#runner1").css("margin-top", -500);
 			    		pos1X= false;
 			    	}
+		    	}
 
-			    	if ((runnerPosX == runnerMaxPosX1-50) && pos2X===true)
+		    	// Corredor 2
+	    		if (posX_R2>0 && pos2X===true)
+		    	{
+		    		// Posición.. Determinada por la velocidad ramdon en px 
+					posX_R2+= getRandomInt(1,5);
+		    		
+		    		$("#runner2").css("margin-left", posX_R2);
+		    		$("#runnerR2").css("margin-left", posX_R2+8);
+
+		    		// Finalizar movimiento Eje X
+			    	if (posX_R2 >= (runnerMaxPosX1-50))
 			    	{
 			    		$("#runner2").css("margin-top", -500);
 			    		pos2X= false;
 			    	}
+		    	}
 
-			    	if ((runnerPosX == runnerMaxPosX1) && pos3X===true)
+		    	// Corredor 3
+	    		if (posX_R3>0 && pos3X===true)
+		    	{
+		    		// Posición.. Determinada por la velocidad ramdon en px 
+					posX_R3+= getRandomInt(1,5);
+		    		
+		    		$("#runner3").css("margin-left", posX_R3);
+		    		$("#runnerR3").css("margin-left", posX_R3+8);
+
+		    		// Finalizar movimiento Eje X
+			    	if (posX_R3 >= runnerMaxPosX1)
 			    	{
 			    		$("#runner3").css("margin-top", -500);
 			    		pos3X= false;
 			    	}
 		    	}
 
-		    	// Movimiento Eje X. Rotacion 1 - Esquina inferior
-		    	// Rotacion Eje X - corredor 1
-	    		if(runnerPosX==runner1RotX && pos1X===true)
+
+		    			/* Movimiento Eje X. Rotacion 1 - Esquina inferior */
+
+		    	// Corredor 1
+	    		if(posX_R1>=runner1RotX && pos1X===true)
 	    		{
 	    			$("#runner1").css("transform", "rotate("+runner1Rot1+"deg)");
 	    			$("#runner1").css("-ms-transform", "rotate("+runner1Rot1+"deg)");
@@ -101,8 +137,8 @@
 	    			runner1Rot1 += -15;
 	    		}
 
-	    		// Rotacion Eje X - corredor 2
-	    		if(runnerPosX==runner2RotX && pos2X===true)
+	    		// Corredor 2
+	    		if(posX_R2>=runner2RotX && pos2X===true)
 	    		{
 	    			$("#runner2").css("transform", "rotate("+runner2Rot1+"deg)");
 	    			$("#runner2").css("-ms-transform", "rotate("+runner2Rot1+"deg)");
@@ -112,8 +148,8 @@
 	    			runner2Rot1 += -15;
 	    		}
 
-	    		// Rotacion Eje X - corredor 3
-	    		if(runnerPosX==runner3RotX && pos3X===true)
+	    		// Corredor 3
+	    		if(posX_R3>=runner3RotX && pos3X===true)
 	    		{
 	    			$("#runner3").css("transform", "rotate("+runner3Rot1+"deg)");
 	    			$("#runner3").css("-ms-transform", "rotate("+runner3Rot1+"deg)");
@@ -123,25 +159,45 @@
 	    			runner3Rot1 += -15;
 	    		}
 
-		    	// Movimiento Eje Y
-		    	if ((runnerPosY<runnerMaxPosY && runnerPosX==runnerMaxPosX1) && (pos1Y===true || pos2Y===true || pos3Y===true))
+		    			/* Movimiento Eje Y */
+
+		    	// Corredor 1
+		    	if (posY_R1<=(runnerMaxPosY-100) && pos1X===false)
 		    	{
-		    		//$(".runners").css("margin-bottom", runnerPosY);
-		    		//$("#track1").hide();
-		    		if (pos1Y===true) $("#runner1").css("margin-bottom", runnerPosY);
-		    		if (pos2Y===true) $("#runner2").css("margin-bottom", runnerPosY);
-		    		if (pos3Y===true) $("#runner3").css("margin-bottom", runnerPosY);
+		    		// Posición.. Determinada por la velocidad ramdon en px 
+		    		posY_R1 += getRandomInt(1,5);
 
-		    		runnerPosY+= 1;
+		    		//console.log('Corredor queriendo correr'+ posY_R1);
 
-		    		if (runnerPosY == (runnerMaxPosY-100)) pos1Y= false;
-		    		if (runnerPosY == (runnerMaxPosY-50)) pos2Y= false;
-		    		if (runnerPosY == runnerMaxPosY) pos3Y= false;
+		    		$("#runner1").css("margin-bottom", posY_R1);
+		    		$("#runnerR1").css("margin-bottom", posY_R1);
 		    	}
 
-		    	// Movimiento Eje X. Rotacion 2 - Esquina superior
-		    	// Rotacion Eje Y - corredor 1
-		    	if(runnerPosY==runner1RotY && pos1Y===true)
+		    	// Corredor 2
+		    	if (posY_R2<=(runnerMaxPosY-50) && pos2X===false)
+		    	{
+		    		// Posición.. Determinada por la velocidad ramdon en px 
+		    		posY_R2 += getRandomInt(1,5);
+
+		    		$("#runner2").css("margin-bottom", posY_R2);
+		    		$("#runnerR2").css("margin-bottom", posY_R2);
+		    	}
+
+		    	// Corredor 3
+		    	if (posY_R3<=runnerMaxPosY && pos3X===false)
+		    	{
+		    		// Posición.. Determinada por la velocidad ramdon en px 
+		    		posY_R3 += getRandomInt(1,5);
+
+		    		$("#runner3").css("margin-bottom", posY_R3);
+		    		$("#runnerR3").css("margin-bottom", posY_R3);
+		    	}
+
+
+		    			/* Movimiento Eje Y. Rotacion 2 - Esquina superior */
+		    	
+		    	// Corredor 1		    	
+		    	if(posY_R1>=runner1RotY && posY_R1>=(runnerMaxPosY-100))
 	    		{
 	    			$("#runner1").css("transform", "rotate("+runner1Rot2+"deg)");
 	    			$("#runner1").css("-ms-transform", "rotate("+runner1Rot2+"deg)");
@@ -151,8 +207,8 @@
 	    			runner1Rot2 += -15;
 	    		}
 
-	    		// Rotacion Eje Y - corredor 2
-	    		if(runnerPosY==runner2RotY && pos2Y===true)
+	    		// Corredor 2
+	    		if(posY_R2>=runner2RotY && posY_R2>=(runnerMaxPosY-50))
 	    		{
 	    			$("#runner2").css("transform", "rotate("+runner2Rot2+"deg)");
 	    			$("#runner2").css("-ms-transform", "rotate("+runner2Rot2+"deg)");
@@ -162,8 +218,8 @@
 	    			runner2Rot2 += -15;
 	    		}
 
-	    		// Rotacion Eje Y - corredor 3
-	    		if(runnerPosY==runner3RotY && pos3Y===true)
+	    		// Corredor 3
+	    		if(posY_R3>=runner3RotY && posY_R3>=runnerMaxPosY)
 	    		{
 	    			$("#runner3").css("transform", "rotate("+runner3Rot2+"deg)");
 	    			$("#runner3").css("-ms-transform", "rotate("+runner3Rot2+"deg)");
@@ -173,39 +229,88 @@
 	    			runner3Rot2 += -15;
 	    		}
 
-		    	// Movimiento Eje X
-		    	if ((runnerPosX>runnerMaxPosX2 && runnerPosY==runnerMaxPosY) && (pos1X===false || pos2X===false || pos3X===false))
+
+	    				/* Movimiento Eje X (<-) vuelta */
+
+	    		// Corredor 1 
+
+	    		if ((posX_R1>=runnerMaxPosX2 && posY_R1>=(runnerMaxPosY-100)) && pos1X===false)
 		    	{
-		    		runnerPosX -= 1;
+		    		posX_R1 -= getRandomInt(1,5);
 
-		    		$("#runner1").css("margin-left", runnerPosX);
-		    		$("#runner2").css("margin-left", runnerPosX);
-		    		$("#runner3").css("margin-left", runnerPosX);
+		    		$("#runner1").css("margin-left", posX_R1);
+		    		$("#runnerR1").css("margin-left", posY_R1);
 
-		    		if (runnerPosX==runnerMaxPosX2)
+		    		if (posX_R1<=runnerMaxPosX2)
 		    		{
 		    			chatSocket.send(JSON.stringify({
 			            	'message': 'runner1 display1',
 				        }));
 
-		    			$(".runners").remove();
-		    			$(".runnersR").remove();
+		    			$("#runner1").remove();
+		    			$("#runnerR1").remove();
 		    		}
+		    	}
+
+		    	// Corredor 2 
+
+	    		if ((posX_R2>=runnerMaxPosX2 && posY_R2>=(runnerMaxPosY-100)) && pos2X===false)
+		    	{
+		    		posX_R2 -= getRandomInt(1,5);
+
+		    		$("#runner2").css("margin-left", posX_R2);
+		    		$("#runnerR2").css("margin-left", posY_R2);
+
+		    		if (posX_R2<=runnerMaxPosX2)
+		    		{
+		    			chatSocket.send(JSON.stringify({
+			            	'message': 'runner2 display1',
+				        }));
+
+		    			$("#runner2").remove();
+		    			$("#runnerR2").remove();
+		    		}
+		    	}
+
+		    	// Corredor 3 
+
+	    		if ((posX_R3>=runnerMaxPosX2 && posY_R3>=(runnerMaxPosY-100)) && pos3X===false)
+		    	{
+		    		posX_R3 -= getRandomInt(1,5);
+
+		    		$("#runner3").css("margin-left", posX_R3);
+		    		$("#runnerR3").css("margin-left", posY_R3);
+
+		    		
+		    		if (posX_R3<=runnerMaxPosX2)
+		    		{
+		    			chatSocket.send(JSON.stringify({
+			            	'message': 'runner3 display1',
+				        }));
+
+		    			$("#runner3").remove();
+		    			$("#runnerR3").remove();
+		    		}
+		    		
 		    	}
 
 	    	}
 	    }
 
+	    // Retorna un entero aleatorio entre min (incluido) y max (excluido)
+		// ¡Usando Math.round() te dará una distribución no-uniforme!
+		function getRandomInt(min, max) 
+		{
+			return Math.floor(Math.random() * (max - min)) + min;
+		}
+
 	    /* Funciones de WebSocket */
 
-	    function verificarConexion(){
-
-	    	//document.querySelector('#chat-log').value += ('Soy la pantalla 2.. \n');
-
+	    function verificarConexion()
+	    {
 	    	chatSocket.send(JSON.stringify({
 	            'message': '2'
 	        }));
-
 	    }
 
 	    var chatSocket = new WebSocket(
@@ -222,54 +327,82 @@
 	        			display1 = true;
 	        		break;
 
-	        	case '2':
-	        			// Todo en orden
-	        			$('#chat-log').val('');
-	        			$('chat-log').empty();
-	        		break;
-
 	        	case '3':
 	        			display3 = true;
 	        		break;
 
-	        	default:
-	        			
-	        			if (message == 'runner1 display2')
+	        	case 'Play':
+
+						/* La acción recibida es reanudar la simulación */
+
+						// Verificamos si en dicha pantalla se encuentra la animación
+
+	        			if (runnerStart===true)
 	        			{
-	        				//$("#runner1").hide();
-	        				runnerStart= true;
 	        				runnerStatus= true;
-	        				//runners();
-	        			}
 
-	        			// Verificamos si la acción recibida es detener la simulación y si en dicha pantalla se encuentra la animación
+	        				$("#runnerR1").hide();
+				    		$("#runnerR2").hide();
+				    		$("#runnerR3").hide();
 
-	        			if (message== 'Stop' && runnerStart===true)
+				    		$("#runner1").css("display", "initial");
+				    		$("#runner2").css("display", "initial");
+				    		$("#runner3").css("display", "initial");
+	        			}        				
+
+	        		break;
+
+	        	case 'Stop':
+	        	
+        				/* La acción recibida es detener la simulación */
+
+        				// Verificamos si en dicha pantalla se encuentra la animación
+
+	        			if (runnerStart===true)
 	        			{
 	        				runnerStatus= false;
 
-	        				$(".runnersR").show();
-							$(".runners").css("display", "none");
+	        				$("#runnerR1").show();
+				    		$("#runnerR2").show();
+				    		$("#runnerR3").show();
+
+							$("#runner1").css("display", "none");
+							$("#runner2").css("display", "none");
+							$("#runner3").css("display", "none");
 	        			}
 
-	        			// Verificamos si la acción recibida es reanudar la simulación y si en dicha pantalla se encuentra la animación
+	        		break;
 
-	        			if (message== 'Play' && runnerStart===true)
-	        			{
-	        				runnerStatus= true;
+	        	case 'runner1 display2':
 
-	        				$(".runners").hide();
-							$(".runners").css("display", "initial");
-	        			}
-	        			
-	        			//document.querySelector('#chat-log').value += (message);
+	        			// Empezamos el relevo del corredor 1
+
+	        			runnerStart= true;
+        				runnerStatus= true;
+        				posX_R1= 1;
+
+	        		break;
+
+	        	case 'runner2 display2':
+
+	        			// Empezamos el relevo del corredor 2
+
+	        			runnerStart= true;
+        				runnerStatus= true;
+        				posX_R2= 1;
+
+	        		break;
+
+	        	case 'runner3 display2':
+
+	        			// Empezamos el relevo del corredor 3
+
+	        			runnerStart= true;
+        				runnerStatus= true;
+        				posX_R3= 1;
 
 	        		break;
 	        }
-
-
-
-	        //document.querySelector('#chat-log').value += (message);
 	    };
 
 	    function verificarConectividad()

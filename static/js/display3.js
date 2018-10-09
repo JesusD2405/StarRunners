@@ -13,6 +13,14 @@
 	    var posX = true;
 	    var posY = true;
 	    var runnerDisplay = 1;
+	    //Posición de los corredores en el eje X
+	    var posX_R1 = -150;
+		var posX_R2 = -150;
+		var posX_R3 = -150;
+		//Posición de los corredores en el eje Y
+	    var posY_R1 = -49;
+		var posY_R2 = -49;
+		var posY_R3 = -49;
 
 	    // Rotacion de la simulacion
 	    var runnerRotX = -99;
@@ -29,8 +37,8 @@
 		});
 
     	setInterval(function(){runners()},15);
-	   	setInterval(function(){verificarConexion()},2000);
-	   	setInterval(function(){verificarConectividad()},3000);
+	   	setInterval(function(){verificarConexion()},1500);
+	   	setInterval(function(){verificarConectividad()},2000);
 
 	   	/* Funciones de la simulacion */
 
@@ -38,16 +46,100 @@
 	    {
 	    	if (runnerStart===true && runnerStatus===true)
 	    	{
+	    		/* Movimiento Eje X <- ida */
+
+	    		// Corredor 1
+		    	if (posX_R1>-150)
+		    	{
+		    		$("#runnerR1").hide();
+
+		    		if (posX_R1 == 110)
+		    		{
+			    		$("#runner1").css("transform", "rotate(-180deg)");
+			    		$("#runner1").css("-ms-transform", "rotate(-180deg)");
+			    		$("#runner1").css("-webkit-transform", "rotate(-180deg)");
+		    		}
+
+		    		// Posición.. Determinada por la velocidad ramdon en px 
+		    		posX_R1-= getRandomInt(1,5);
+
+		    		$("#runner1").css("margin-left", posX_R1);
+		    		$("#runnerR1").css("margin-left", posX_R1);
+		    		$("#runner1").css("display", "initial");
+
+		    		// Movimiento Eje Y
+			    	if (posX_R1 == -150)
+			    	{
+			    		$("#runner1").css("margin-top", -10);
+			    		posX= false;
+			    	}
+		    	}
+
+		    	// Corredor 2
+		    	if (posX_R2>-150)
+		    	{
+		    		$("#runnerR2").hide();
+
+		    		if (posX_R2 == 110)
+		    		{
+			    		$("#runner2").css("transform", "rotate(-180deg)");
+			    		$("#runner2").css("-ms-transform", "rotate(-180deg)");
+			    		$("#runner2").css("-webkit-transform", "rotate(-180deg)");
+		    		}
+
+		    		// Posición.. Determinada por la velocidad ramdon en px 
+		    		posX_R2-= getRandomInt(1,5);
+
+		    		$("#runner2").css("margin-left", posX_R2);
+		    		$("#runnerR2").css("margin-left", posX_R2);
+		    		$("#runner2").css("display", "initial");
+
+		    		// Movimiento Eje Y
+			    	if (posX_R2 == -150)
+			    	{
+			    		$("#runner2").css("margin-top", -10);
+			    		posX= false;
+			    	}
+		    	}
+
+		    	// Corredor 3
+		    	if (posX_R3>-150)
+		    	{
+		    		$("#runnerR3").hide();
+
+		    		if (posX_R3 == 110)
+		    		{
+			    		$("#runner3").css("transform", "rotate(-180deg)");
+			    		$("#runner3").css("-ms-transform", "rotate(-180deg)");
+			    		$("#runner3").css("-webkit-transform", "rotate(-180deg)");
+		    		}
+
+		    		// Posición.. Determinada por la velocidad ramdon en px 
+		    		posX_R3-= getRandomInt(1,5);
+
+		    		$("#runner3").css("margin-left", posX_R3);
+		    		$("#runnerR3").css("margin-left", posX_R3);
+		    		$("#runner3").css("display", "initial");
+
+		    		// Movimiento Eje Y
+			    	if (posX_R3 == -150)
+			    	{
+			    		$("#runner3").css("margin-top", -10);
+			    		posX= false;
+			    	}
+		    	}
+
+	    		/*
+
 	    		// Movimiento Eje X
 		    	if (runnerPosX>-150 && posX===true)
 		    	{
-		    		//alert('Aja');
 		    		$(".runnerR").hide();
 		    		if (runnerPosX == 110)
 		    		{
-			    		$(".runners").css("transform", "rotate(-180deg)");
-			    		$(".runners").css("-ms-transform", "rotate(-180deg)");
-			    		$(".runners").css("-webkit-transform", "rotate(-180deg)");
+			    		$("runners").css("transform", "rotate(-180deg)");
+			    		$("runners").css("-ms-transform", "rotate(-180deg)");
+			    		$("runners").css("-webkit-transform", "rotate(-180deg)");
 		    		}
 		    		$(".runners").css("margin-left", runnerPosX);
 		    		$(".runners").css("display", "initial");
@@ -62,7 +154,47 @@
 			    	}
 		    	}
 
-		    	// Movimiento Eje Y. Rotacion 1 - Esquina superior
+		    	*/
+
+		    	/* Movimiento Eje Y. Rotacion 1 - Esquina superior */
+
+		    	// Corredor 1
+
+		    	if ((posY_R1>-350 && posX_R1<=runnerRotX) && posY===true)
+		    	{
+		    		$("#runner1").css("transform", "rotate("+runnerRot1+"deg)");
+		    		$("#runner1").css("-ms-transform", "rotate("+runnerRot1+"deg)");
+		    		$("#runner1").css("-webkit-transform", "rotate("+runnerRot1+"deg)");
+
+		    		runnerRotX += -10;
+		    		runnerRot1 += -15;
+		    	}
+
+		    	// Corredor 2
+
+		    	if ((posY_R2>-350 && posX_R2<=runnerRotX) && posY===true)
+		    	{
+		    		$("#runner1").css("transform", "rotate("+runnerRot1+"deg)");
+		    		$("#runner1").css("-ms-transform", "rotate("+runnerRot1+"deg)");
+		    		$("#runner1").css("-webkit-transform", "rotate("+runnerRot1+"deg)");
+
+		    		runnerRotX += -10;
+		    		runnerRot1 += -15;
+		    	}
+
+		    	// Corredor 3
+
+		    	if ((posY_R3>-350 && posX_R3<=runnerRotX) && posY===true)
+		    	{
+		    		$("#runner1").css("transform", "rotate("+runnerRot1+"deg)");
+		    		$("#runner1").css("-ms-transform", "rotate("+runnerRot1+"deg)");
+		    		$("#runner1").css("-webkit-transform", "rotate("+runnerRot1+"deg)");
+
+		    		runnerRotX += -10;
+		    		runnerRot1 += -15;
+		    	}
+
+		    	/*
 		    	if ((runnerPosY>-350 && runnerPosX==runnerRotX) && posY===true)
 		    	{
 		    		$(".runners").css("transform", "rotate("+runnerRot1+"deg)");
@@ -73,8 +205,56 @@
 		    		runnerRot1 += -15;
 		    	}
 
+		    	*/
+
+		    	/* Movimiento Eje Y */
+
+		    	// Corredor 1
+		    	if (posY_R1>-350 && posX_R1<=-150)
+		    	{
+		    		// Posición.. Determinada por la velocidad ramdon en px 
+		    		posY_R1 -= getRandomInt(1,5);
+
+		    		$("#runner1").css("margin-bottom", posY_R1);
+
+		    		if (posY_R1 <= -350)
+			    	{
+			    		posY= false;
+			    	}
+		    	}
+
+		    	// Corredor 2
+		    	if (posY_R2>-350 && posX_R2<=-150)
+		    	{
+		    		// Posición.. Determinada por la velocidad ramdon en px 
+		    		posY_R2 -= getRandomInt(1,5);
+
+		    		$("#runner2").css("margin-bottom", posY_R2);
+
+		    		if (posY_R2 <= -350)
+			    	{
+			    		posY= false;
+			    	}
+		    	}
+
+		    	// Corredor 3
+		    	if (posY_R3>-350 && posX_R3<=-150)
+		    	{
+		    		// Posición.. Determinada por la velocidad ramdon en px 
+		    		posY_R3 -= getRandomInt(1,5);
+
+		    		$("#runner3").css("margin-bottom", posY_R3);
+
+		    		if (posY_R3 <= -350)
+			    	{
+			    		posY= false;
+			    	}
+		    	}
+
+		    	/*
+
 		    	// Movimiento Eje Y
-		    	if ((runnerPosY>-350 && runnerPosX==-150) && posY===true)
+		    	if ((runnerPosY>-350 && runnerPosX<=-150) && posY===true)
 		    	{
 		    		$(".runners").css("margin-bottom", runnerPosY);
 		    		//$("#track1").hide();
@@ -87,7 +267,52 @@
 			    	}
 		    	}
 
-		    	// Movimiento Eje X. Rotacion 2 - Esquina inferior
+		    	*/
+
+		    	/* Movimiento Eje X. Rotacion 2 - Esquina inferior */
+
+
+		    	// Corredor 1
+
+		    	/*
+
+		    	if ((posX_R1<143 && posY_R1>=runnerRotY) && posX===false)
+		    	{
+		    		$("#runner1").css("transform", "rotate("+runnerRot2+"deg)");
+		    		$("#runner1").css("-ms-transform", "rotate("+runnerRot2+"deg)");
+		    		$("#runner1").css("-webkit-transform", "rotate("+runnerRot2+"deg)");
+
+		    		runnerRotY += -10;
+		    		runnerRot2 += -15;
+		    	}
+
+		    	// Corredor 2
+
+		    	if ((posX_R2<143 && posY_R2>=runnerRotY) && posX===false)
+		    	{
+		    		$("#runner2").css("transform", "rotate("+runnerRot2+"deg)");
+		    		$("#runner2").css("-ms-transform", "rotate("+runnerRot2+"deg)");
+		    		$("#runner2").css("-webkit-transform", "rotate("+runnerRot2+"deg)");
+
+		    		runnerRotY += -10;
+		    		runnerRot2 += -15;
+		    	}
+
+		    	// Corredor 3
+
+		    	if ((posX_R3<143 && posY_R3>=runnerRotY) && posX===false)
+		    	{
+		    		$("#runner3").css("transform", "rotate("+runnerRot2+"deg)");
+		    		$("#runner3").css("-ms-transform", "rotate("+runnerRot2+"deg)");
+		    		$("#runner3").css("-webkit-transform", "rotate("+runnerRot2+"deg)");
+
+		    		runnerRotY += -10;
+		    		runnerRot2 += -15;
+		    	}
+
+		    	*/
+
+		    	/*
 		    	if ((runnerPosX<143 && runnerPosY==runnerRotY) && posX===false)
 		    	{
 		    		$(".runners").css("transform", "rotate("+runnerRot2+"deg)");
@@ -97,8 +322,29 @@
 		    		runnerRotY += -10;
 		    		runnerRot2 += -15;
 		    	}
+		    	*/
 
-		    	// Movimiento Eje X
+		    	/* Movimiento Eje X -> vuelta */ 
+
+		    	// Corredor 1
+		    	if ((posX_R1<143 && posY_R1>=-350) && posX===false)
+		    	{
+		    		// Posición.. Determinada por la velocidad ramdon en px 
+		    		posX_R1 += getRandomInt(1,5);
+
+		    		$("#runner1").css("margin-left", posX_R1);
+
+		    		if (posX_R1>=142)
+		    		{
+		    			chatSocket.send(JSON.stringify({
+			            	'message': 'runner1 display1',
+				        }));
+
+		    			$("#runner1").hide();	
+		    		}
+		    	}
+
+		    	/*
 		    	if ((runnerPosX<143 && runnerPosY==-350) && posX===false)
 		    	{
 		    		runnerPosX += 1;
@@ -114,20 +360,18 @@
 		    			$(".runners").hide();	
 		    		}
 		    	}
+		    	*/
 	    	}
 
 	    }
 
 	    /* Funciones de WebSocket */
 
-	    function verificarConexion(){
-
-	    	//document.querySelector('#chat-log').value += ('Soy la pantalla 2.. \n');
-
+	    function verificarConexion()
+	    {
 	    	chatSocket.send(JSON.stringify({
 	            'message': '3'
 	        }));
-
 	    }
 
 	    var chatSocket = new WebSocket(
@@ -148,48 +392,81 @@
 	        			display2 = true;
 	        		break;
 
-	        	case '3':
-        				//Todo en orden
-        				$('#chat-log').val('');
-        				$('chat-log').empty();
+	        	case 'Play':
+
+						/* La acción recibida es reanudar la simulación */
+
+						// Verificamos si en dicha pantalla se encuentra la animación
+
+	        			if (runnerStart===true)
+	        			{
+	        				runnerStatus= true;
+
+	        				$("#runnerR1").hide();
+				    		$("#runnerR2").hide();
+				    		$("#runnerR3").hide();
+
+				    		$("#runner1").css("display", "initial");
+				    		$("#runner2").css("display", "initial");
+				    		$("#runner3").css("display", "initial");
+	        			}        				
+
 	        		break;
 
-	        	default:
+	        	case 'Stop':
+	        	
+        				/* La acción recibida es detener la simulación */
 
-	        			if (message == 'runner1 display3')
-	        			{
-	        				//$("#runner1").hide();
-	        				runnerStart= true;
-	        				runnerStatus= true;
-	        				//runners();
-	        			}
+        				// Verificamos si en dicha pantalla se encuentra la animación
 
-	        			// Verificamos si la acción recibida es detener la simulación y si en dicha pantalla se encuentra la animación
-
-	        			if (message== 'Stop' && runnerStart===true)
+	        			if (runnerStart===true)
 	        			{
 	        				runnerStatus= false;
 
-	        				$(".runnersR").show();
-							$(".runners").css("display", "none");
+	        				$("#runnerR1").show();
+				    		$("#runnerR2").show();
+				    		$("#runnerR3").show();
+
+							$("#runner1").css("display", "none");
+							$("#runner2").css("display", "none");
+							$("#runner3").css("display", "none");
 	        			}
 
-	        			// Verificamos si la acción recibida es reanudar la simulación y si en dicha pantalla se encuentra la animación
+	        		break;
 
-	        			if (message== 'Play' && runnerStart===true)
-	        			{
-	        				runnerStatus= true;
+	        	case 'runner1 display3':
 
-	        				$(".runnersR").hide();
-							$(".runners").css("display", "initial");
-	        			}
+	        			runnerStart= true;
+	        			runnerStatus= true;
+	        			posX_R1= 110;
 
-	        			//document.querySelector('#chat-log').value += (message);
+	        		break;
+
+	        	case 'runner2 display3':
+
+	        			runnerStart= true;
+	        			runnerStatus= true;
+	        			posX_R2= 110;
+
+	        		break;
+
+	        	case 'runner3 display3':
+
+	        			runnerStart= true;
+	        			runnerStatus= true;
+	        			posX_R3= 110;
+
 	        		break;
 	        }
 
-	        //document.querySelector('#chat-log').value += (message);
 	    };
+
+	    // Retorna un entero aleatorio entre min (incluido) y max (excluido)
+		// ¡Usando Math.round() te dará una distribución no-uniforme!
+		function getRandomInt(min, max) 
+		{
+			return Math.floor(Math.random() * (max - min)) + min;
+		}
 
 	    function verificarConectividad()
 	    {

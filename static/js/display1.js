@@ -9,6 +9,10 @@
 	    var runnerDisplay = 1;
 	    var posX = true;
 	    var runnerStart= false;
+	    //Posición de los corredores
+	    var posX_R1 = 0;
+		var posX_R2 = 0;
+		var posX_R3 = 0;
 
 	    // Jquery
 
@@ -25,15 +29,19 @@
 
 				if (posX===true)
 				{
-					$(".runnersR1").hide();
+					$("#runnerR1").hide();
+					$("#runnerR2").hide();
+					$("#runnerR3").hide();
 				}
 				
 				if(runnerPos>-44 && posX===false) 
 				{
-					$(".runnersR2").hide();
+					$("#runnerR2").hide();
 				}
 
-				$(".runners").css("display", "initial");
+				$("#runner1").css("display", "initial");
+				$("#runner2").css("display", "initial");
+				$("#runner3").css("display", "initial");
 
 				// Replicamos la acción
 				chatSocket.send(JSON.stringify({
@@ -50,7 +58,9 @@
 
 				if (posX===true)
 				{
-					$(".runnersR1").show();
+					$("#runnerR1").show();
+					$("#runnerR2").show();
+					$("#runnerR3").show();
 				}
 
 				if(runnerPos>-44 && posX===false) 
@@ -58,7 +68,9 @@
 					$(".runnersR2").show();
 				}
 
-				$(".runners").css("display", "none");
+				$("#runner1").css("display", "none");
+				$("#runner2").css("display", "none");
+				$("#runner3").css("display", "none");
 
 				// Replicamos la acción
 				chatSocket.send(JSON.stringify({
@@ -71,8 +83,8 @@
 	    /* Funciones que se ejecutan segun un tiempo determinado */
 
 	    setInterval(function(){runners()},15);
-	    setInterval(function(){verificarConexion()},2000);
-	    setInterval(function(){verificarConectividad()},3000);
+	    setInterval(function(){verificarConexion()},1500);
+	    setInterval(function(){verificarConectividad()},2000);
 
 
 	    /* Funciones de la simulacion */
@@ -81,66 +93,204 @@
 	    {
 	    	//console.log('Accion: '+ runnerStart);
 
+	    	//console.log('Número aleatorio: '+ getRandomInt(1,5)); 
+
 	    	// Verificamos si la acción de la simulación está activada
 
 			if (runnerStart===true) 
 			{
-				/* Movimiento Eje X (->)  ida */
+						/* Movimiento Eje X (->) ida */
 
-		    	if (runnerPos<388 && posX===true)
+				// Corredor 1
+
+				if (posX_R1<388 && posX===true)
+				{
+					// Posición.. Determinada por la velocidad ramdon en px 
+					posX_R1+= getRandomInt(1,5);
+
+					// Movimiento del corredor (En movimiento / En reposo)
+					$("#runner1").css("margin-left", posX_R1);
+					$("#runnerR1").css("margin-left", posX_R1+8);
+
+					// Verificamos si el corredor 1 llegó al final de la pantalla
+					if (posX_R1>387)
+					{
+						console.log('LLegó el corredor: 1');
+						// Iniciamos el relevo con el corredor 1 de la pantalla 2
+						
+						chatSocket.send(JSON.stringify({
+				            'message': 'runner1 display2',
+				        }));
+						
+				        // Eliminamos la animación del corredor 1 en la pantalla
+
+				        $("#runnerR1").remove();
+				        $("#runner1").remove();
+
+				        // Le damos un valor inicial para el relevo
+				        posX_R1= -43;
+					}
+				}
+
+				// Corredor 2
+
+				if (posX_R2<388 && posX===true)
+				{
+					// Posición.. Determinada por la velocidad ramdon en px 
+					posX_R2+= getRandomInt(1,5);
+					
+					// Movimiento del corredor (En movimiento / En reposo)
+					$("#runner2").css("margin-left", posX_R2);
+					$("#runnerR2").css("margin-left", posX_R2+8);
+
+					// Verificamos si el corredor 2 llegó al final de la pantalla
+					if (posX_R2>387)
+					{
+						console.log('LLegó el corredor: 2');
+						// Iniciamos el relevo con el corredor 2 de la pantalla 2
+						chatSocket.send(JSON.stringify({
+				            'message': 'runner2 display2',
+				        }));
+
+				        // Eliminamos la animación del corredor 2 en la pantalla
+				        $("#runnerR2").remove();
+				        $("#runner2").remove();
+
+				        // Le damos un valor inicial para el relevo
+				        posX_R2= -43;
+					}
+				}
+
+				// Corredor 3
+
+				if (posX_R3<388 && posX===true)
+				{
+					// Posición.. Determinada por la velocidad ramdon en px 
+					posX_R3+= getRandomInt(1,5);
+
+					// Movimiento del corredor (En movimiento / En reposo)
+					$("#runner3").css("margin-left", posX_R3);
+					$("#runnerR3").css("margin-left", posX_R3+8);
+
+					// Verificamos si el corredor 3 llegó al final de la pantalla
+					if (posX_R3>387)
+					{
+						console.log('LLegó el corredor: 3');
+						// Iniciamos el relevo con el corredor 3 de la pantalla 2
+						chatSocket.send(JSON.stringify({
+				            'message': 'runner3 display2',
+				        }));
+
+				        // Eliminamos la animación del corredor 3 en la pantalla
+				        $("#runnerR3").remove();
+				        $("#runner3").remove();
+
+				        // Le damos un valor inicial para el relevo
+				        posX_R3= -43;
+					}
+				}
+
+
+		    			/* Movimiento Eje X (<-) vuelta */
+
+		    	// Corredor 1
+
+		    	if (posX_R1>=387 && posX===false)
 		    	{
-		    		$(".runners").css("margin-left", runnerPos);
-		    		$(".runnersR1").css("margin-left", runnerPos);
-		    		//$("#track1").hide();
-
-		    		runnerPos+= 1;
-
-		    		console.log('otto man');
+		    		$("#runner_R1").hide();
+		    		$("#runner_1").css("display", "initial");
+		    		$("#runner_1").css("transform", "rotate(-180deg)");
+		    		$("#runner_1").css("-ms-transform", "rotate(-180deg)");
+		    		$("#runner_1").css("-webkit-transform", "rotate(-180deg)");
 		    	}
 
-		    	/* Movimiento Eje X (<-)  vuelta */
 
-		    	if (runnerPos==387 && posX===false)
+		    	if (posX_R1>-44 && posX===false)
 		    	{
-		    		$(".runnerR2").hide();
-		    		$(".runners2").css("display", "initial");
-		    		$(".runners2").css("transform", "rotate(-180deg)");
-		    		$(".runners2").css("-ms-transform", "rotate(-180deg)");
-		    		$(".runners2").css("-webkit-transform", "rotate(-180deg)");
-		    	}
+		    		posX_R1-= getRandomInt(1,5);
 
+		    		$("#runner_1").css("margin-left", posX_R1);
+		    		$("#runner_R1").css("margin-left", posX_R1);
 
-		    	if (runnerPos>-44 && posX===false)
-		    	{
-		    		runnerPos-= 1;
-
-		    		$(".runners2").css("margin-left", runnerPos);
-		    		$(".runnerR2").css("margin-left", runnerPos);
-
-		    		if (runnerPos==-44)
+		    		if (posX_R1<=-44)
 		    		{
 		    			chatSocket.send(JSON.stringify({
 				            'message': 'runner1 display3',
 				        }));
-		    			$(".runners2").hide();
+
+		    			$("#runner_1").hide();
+		    		}
+
+		    	}
+
+		    	// Corredor 2
+
+		    	if (posX_R2>=387 && posX===false)
+		    	{
+		    		$("#runner_R2").hide();
+		    		$("#runner_2").css("display", "initial");
+		    		$("#runner_2").css("transform", "rotate(-180deg)");
+		    		$("#runner_2").css("-ms-transform", "rotate(-180deg)");
+		    		$("#runner_2").css("-webkit-transform", "rotate(-180deg)");
+		    	}
+
+
+		    	if (posX_R2>-44 && posX===false)
+		    	{
+		    		posX_R2-= getRandomInt(1,5);
+
+		    		$("#runner_2").css("margin-left", posX_R2);
+		    		$("#runner_R2").css("margin-left", posX_R2);
+
+		    		if (posX_R2<=-44)
+		    		{
+		    			chatSocket.send(JSON.stringify({
+				            'message': 'runner2 display3',
+				        }));
+
+		    			$("#runner_2").hide();
 		    		}
 		    	}
 
+		    	// Corredor 3
 
-		    	if (runnerDisplay == 1 && runnerPos == 387)
+		    	if (posX_R3>=387 && posX===false)
 		    	{
-		    		runnerDisplay = 2;
-
-		    		chatSocket.send(JSON.stringify({
-			            'message': 'runner1 display2',
-			        }));
-
-			        $(".runnersR1").remove();
-			        $(".runners").remove();
+		    		$("#runner_R3").hide();
+		    		$("#runner_3").css("display", "initial");
+		    		$("#runner_3").css("transform", "rotate(-180deg)");
+		    		$("#runner_3").css("-ms-transform", "rotate(-180deg)");
+		    		$("#runner_3").css("-webkit-transform", "rotate(-180deg)");
 		    	}
+
+
+		    	if (posX_R3>-44 && posX===false)
+		    	{
+		    		posX_R3-= getRandomInt(1,5);
+
+		    		$("#runner_3").css("margin-left", posX_R3);
+		    		$("#runner_R3").css("margin-left", posX_R3);
+
+		    		if (posX_R3<=-44)
+		    		{
+		    			chatSocket.send(JSON.stringify({
+				            'message': 'runner3 display3',
+				        }));
+
+		    			$("#runner_3").hide();
+		    		}
+		    	}
+
 			}
 
 	    }
+
+	    // Retorna un entero aleatorio entre min (incluido) y max (excluido)
+		// ¡Usando Math.round() te dará una distribución no-uniforme!
+		function getRandomInt(min, max) 
+		{
+			return Math.floor(Math.random() * (max - min)) + min;
+		}
 
 	    /* Funciones WebSocket */
 
@@ -181,16 +331,30 @@
 	        			display3 = true;
 	        		break;
 
-	        	default:
+	        	case 'runner1 display1':
 
-	        			if (message == 'runner1 display1')
-	        			{
-	        				//$("#runner1").hide();
-	        				posX= false;
-	        				//runners();
-	        			}
+	        			// Empezamos el relevo del corredor 1
 
-	        			//document.querySelector('#chat-log').value += (message);
+	        			posX= false;
+	        			posX_R1= 389;
+
+	        		break;
+
+	        	case 'runner2 display1':
+
+	        			// Empezamos el relevo del corredor 2
+
+	        			posX= false;
+	        			posX_R2= 389;
+
+	        		break;
+
+	        	case 'runner3 display1':
+
+	        			// Empezamos el relevo del corredor 3
+
+	        			posX= false;
+	        			posX_R3= 389;
 
 	        		break;
 	        }
@@ -209,6 +373,7 @@
 	    	if (display2===false)
 	    	{
 	    		$('#DisplayDisconnect').modal('open');
+	    		runnerStart = false;
 
 	    		console.log($('#display').html());
 
@@ -227,6 +392,7 @@
 	    	if (display3===false)
 	    	{
 	    		$('#DisplayDisconnect').modal('open');
+	    		runnerStart = false;
 
 	    		if ($('#display').text()!=3)
 	    		{
