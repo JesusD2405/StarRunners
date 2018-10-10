@@ -84,7 +84,7 @@
 	  
 	    /* Funciones que se ejecutan segun un tiempo determinado */
 
-	    setInterval(function(){runners()},50);
+	    setInterval(function(){runners()},15);
 	    setInterval(function(){verificarConexion()},1500);
 	    setInterval(function(){verificarConectividad()},2000);
 
