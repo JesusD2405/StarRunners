@@ -29,24 +29,29 @@
 
 				runnerStart = true;
 
-				
-
 				if (posX1===true)
 				{
 					$("#runnerR1").hide();
 					$("#runnerR2").hide();
 					$("#runnerR3").hide();
+
+					$("#runner1").css("display", "initial");
+					$("#runner2").css("display", "initial");
+					$("#runner3").css("display", "initial");
 				}
 				
 				if(runnerPos>-44 && posX1===false) 
 				{
-					$("#runnerR2").hide();
+					$("#runner_R1").hide();
+					$("#runner_R2").hide();
+					$("#runner_R3").hide();
+
+					$("#runner_1").css("display", "initial");
+					$("#runner_2").css("display", "initial");
+					$("#runner_3").css("display", "initial");
 				}
 
-				$("#runner1").css("display", "initial");
-				$("#runner2").css("display", "initial");
-				$("#runner3").css("display", "initial");
-
+				
 				// Replicamos la acción
 				chatSocket.send(JSON.stringify({
 		            'message': 'Play'
@@ -67,16 +72,22 @@
 					$("#runnerR1").show();
 					$("#runnerR2").show();
 					$("#runnerR3").show();
+
+					$("#runner1").css("display", "none");
+					$("#runner2").css("display", "none");
+					$("#runner3").css("display", "none");
 				}
 
 				if(runnerPos>-44 && posX1===false) 
 				{
-					$(".runnersR2").show();
-				}
+					$("#runner_R1").show();
+					$("#runner_R2").show();
+					$("#runner_R3").show();
 
-				$("#runner1").css("display", "none");
-				$("#runner2").css("display", "none");
-				$("#runner3").css("display", "none");
+					$("#runner_1").css("display", "none");
+					$("#runner_2").css("display", "none");
+					$("#runner_3").css("display", "none");
+				}
 
 				// Replicamos la acción
 				chatSocket.send(JSON.stringify({

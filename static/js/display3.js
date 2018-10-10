@@ -80,6 +80,18 @@
 			    		$("#runner1").css("margin-top", -10);
 			    		pos1X= false;
 			    	}
+
+			    	// Verificamos la probabilidad de lesión del corredor
+
+			    	if (getRandomInt(0,2)>0 && (posX_R1>12 && posX_R1<15))
+			    	{
+			    		console.log('El corredor se 1 lesionó..');
+
+			    		posR1X = false;
+			    		$("#runner1").css("display", "none");
+			    		$("#runnerR1").show();
+			    	}
+
 		    	}
 
 		    	// Corredor 2
@@ -97,6 +109,17 @@
 			    		$("#runner2").css("margin-top", -10);
 			    		pos2X= false;
 			    	}
+
+			    	// Verificamos la probabilidad de lesión del corredor
+
+			    	if (getRandomInt(0,2)>0 && (posX_R2>9 && posX_R2<12))
+			    	{
+			    		console.log('El corredor se 2 lesionó..');
+
+			    		posR2X = false;
+			    		$("#runner2").css("display", "none");
+			    		$("#runnerR2").show();
+			    	}
 		    	}
 
 		    	// Corredor 3
@@ -113,6 +136,17 @@
 			    	{
 			    		$("#runner3").css("margin-top", -10);
 			    		pos3X= false;
+			    	}
+
+			    	// Verificamos la probabilidad de lesión del corredor
+
+			    	if (getRandomInt(0,2)>0 && (posX_R3>2 && posX_R3<5))
+			    	{
+			    		console.log('El corredor se 3 lesionó..');
+
+			    		posR3X = false;
+			    		$("#runner3").css("display", "none");
+			    		$("#runnerR3").show();	
 			    	}
 		    	}
 
@@ -442,7 +476,6 @@
 						$("#runner1").css("-ms-transform", "rotate(-180deg)");
 						$("#runner1").css("-webkit-transform", "rotate(-180deg)");
 						$("#runner1").css("display", "initial");
-						
 
 	        		break;
 
