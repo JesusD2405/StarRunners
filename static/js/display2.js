@@ -30,13 +30,14 @@
 	    var pos3Y = true;
 	    var runnerDisplay = 1;
 	    
-	    // Rotacion de la simulacion
+	    // Rotacion de la simulacion. Eje X. Rotacion 1 - Esquina inferior
 	    var runner1RotX = 209;
 	    var runner2RotX = 259;
 	    var runner3RotX = 309;
 	    var runner1Rot1 = -30;
 	    var runner2Rot1 = -30;
 	    var runner3Rot1 = -30;
+	    // Rotacion de la simulacion. Eje Y. Rotacion 2 - Esquina superior
 	    var runner1RotY = 150;
 	    var runner2RotY = 200;
 	    var runner3RotY = 250;

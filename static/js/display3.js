@@ -8,13 +8,19 @@
 	    // Movimiento de la simulacion
 	    var runnerStart = false;
 	    var runnerStatus = false;
-	    var runnerPosX = 110;
-	    var runnerPosY = -49;
-	    var posX = true;
-	    var posY = true;
+	    //var runnerPosX = 110;
+	    //var runnerPosY = -49;
+	    //var posX = true;
+	    //var posY = true;
 	    var runnerDisplay = 1;
+	    var pos1X = true;
+	    var pos2X = true;
+	    var pos3X = true;
+	    var runnerMaxPosX1 = -200;
+	    var runnerMaxPosY = 300;
+	    var runnerMaxPosX2 = -19;
 	    //Posición de los corredores en el eje X
-	    var posX_R1 = -150;
+	    var posX_R1 = 110;
 		var posX_R2 = -150;
 		var posX_R3 = -150;
 		//Posición de los corredores en el eje Y
@@ -23,7 +29,7 @@
 		var posY_R3 = -49;
 
 	    // Rotacion de la simulacion
-	    var runnerRotX = -99;
+	    var runnerRotX = -149;
 	    var runnerRot1 = -195;
 	    var runnerRotY = -300;
 	    var runnerRot2 = -285;
@@ -49,11 +55,11 @@
 	    		/* Movimiento Eje X <- ida */
 
 	    		// Corredor 1
-		    	if (posX_R1>-150)
+		    	if (posX_R1>runnerMaxPosX1 && pos1X===true)
 		    	{
 		    		$("#runnerR1").hide();
 
-		    		if (posX_R1 == 110)
+		    		if (posX_R1 == 110 && pos1X===true)
 		    		{
 			    		$("#runner1").css("transform", "rotate(-180deg)");
 			    		$("#runner1").css("-ms-transform", "rotate(-180deg)");
@@ -68,10 +74,10 @@
 		    		$("#runner1").css("display", "initial");
 
 		    		// Movimiento Eje Y
-			    	if (posX_R1 == -150)
+			    	if (posX_R1 <= runnerMaxPosX1)
 			    	{
 			    		$("#runner1").css("margin-top", -10);
-			    		posX= false;
+			    		pos1X= false;
 			    	}
 		    	}
 
@@ -156,11 +162,11 @@
 
 		    	*/
 
-		    	/* Movimiento Eje Y. Rotacion 1 - Esquina superior */
+		    	/* Movimiento Eje X. Rotacion 1 - Esquina superior */
 
 		    	// Corredor 1
 
-		    	if ((posY_R1>-350 && posX_R1<=runnerRotX) && posY===true)
+		    	if (posX_R1>=runnerRotX && pos1X===true)
 		    	{
 		    		$("#runner1").css("transform", "rotate("+runnerRot1+"deg)");
 		    		$("#runner1").css("-ms-transform", "rotate("+runnerRot1+"deg)");
@@ -168,6 +174,8 @@
 
 		    		runnerRotX += -10;
 		    		runnerRot1 += -15;
+
+		    		console.log('Rotando');
 		    	}
 
 		    	// Corredor 2
@@ -327,7 +335,7 @@
 		    	/* Movimiento Eje X -> vuelta */ 
 
 		    	// Corredor 1
-		    	if ((posX_R1<143 && posY_R1>=-350) && posX===false)
+		    	if ((posX_R1<143 && posY_R1>=-350) && pos1X===false)
 		    	{
 		    		// Posición.. Determinada por la velocidad ramdon en px 
 		    		posX_R1 += getRandomInt(1,5);
@@ -438,7 +446,7 @@
 
 	        			runnerStart= true;
 	        			runnerStatus= true;
-	        			posX_R1= 110;
+	        			//posX_R1= 110;
 
 	        		break;
 
@@ -446,7 +454,7 @@
 
 	        			runnerStart= true;
 	        			runnerStatus= true;
-	        			posX_R2= 110;
+	        			//posX_R2= 110;
 
 	        		break;
 
@@ -454,7 +462,7 @@
 
 	        			runnerStart= true;
 	        			runnerStatus= true;
-	        			posX_R3= 110;
+	        			//posX_R3= 110;
 
 	        		break;
 	        }
