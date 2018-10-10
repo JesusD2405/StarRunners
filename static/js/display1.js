@@ -7,7 +7,9 @@
 	    // Simulacion
 	    var runnerPos = 0;
 	    var runnerDisplay = 1;
-	    var posX = true;
+	    var posX1 = true;
+	    var posX2 = true;
+	    var posX3 = true;
 	    var runnerStart= false;
 	    //Posición de los corredores
 	    var posX_R1 = 0;
@@ -27,14 +29,14 @@
 
 				runnerStart = true;
 
-				if (posX===true)
+				if (posX1===true)
 				{
 					$("#runnerR1").hide();
 					$("#runnerR2").hide();
 					$("#runnerR3").hide();
 				}
 				
-				if(runnerPos>-44 && posX===false) 
+				if(runnerPos>-44 && posX1===false) 
 				{
 					$("#runnerR2").hide();
 				}
@@ -56,14 +58,14 @@
 
 				runnerStart = false;
 
-				if (posX===true)
+				if (posX1===true)
 				{
 					$("#runnerR1").show();
 					$("#runnerR2").show();
 					$("#runnerR3").show();
 				}
 
-				if(runnerPos>-44 && posX===false) 
+				if(runnerPos>-44 && posX1===false) 
 				{
 					$(".runnersR2").show();
 				}
@@ -82,7 +84,7 @@
 	  
 	    /* Funciones que se ejecutan segun un tiempo determinado */
 
-	    setInterval(function(){runners()},15);
+	    setInterval(function(){runners()},50);
 	    setInterval(function(){verificarConexion()},1500);
 	    setInterval(function(){verificarConectividad()},2000);
 
@@ -103,7 +105,7 @@
 
 				// Corredor 1
 
-				if (posX_R1<388 && posX===true)
+				if ((posX_R1<388 && posX1===true) && $('#runner1').length>0)
 				{
 					// Posición.. Determinada por la velocidad ramdon en px 
 					posX_R1+= getRandomInt(1,5);
@@ -126,15 +128,12 @@
 
 				        $("#runnerR1").remove();
 				        $("#runner1").remove();
-
-				        // Le damos un valor inicial para el relevo
-				        posX_R1= -43;
 					}
 				}
 
 				// Corredor 2
 
-				if (posX_R2<388 && posX===true)
+				if ((posX_R2<388 && posX2===true) && $('#runner2').length>0)
 				{
 					// Posición.. Determinada por la velocidad ramdon en px 
 					posX_R2+= getRandomInt(1,5);
@@ -155,15 +154,12 @@
 				        // Eliminamos la animación del corredor 2 en la pantalla
 				        $("#runnerR2").remove();
 				        $("#runner2").remove();
-
-				        // Le damos un valor inicial para el relevo
-				        posX_R2= -43;
 					}
 				}
 
 				// Corredor 3
 
-				if (posX_R3<388 && posX===true)
+				if ((posX_R3<388 && posX3===true) && $('#runner3').length>0)
 				{
 					// Posición.. Determinada por la velocidad ramdon en px 
 					posX_R3+= getRandomInt(1,5);
@@ -184,9 +180,6 @@
 				        // Eliminamos la animación del corredor 3 en la pantalla
 				        $("#runnerR3").remove();
 				        $("#runner3").remove();
-
-				        // Le damos un valor inicial para el relevo
-				        posX_R3= -43;
 					}
 				}
 
@@ -195,17 +188,18 @@
 
 		    	// Corredor 1
 
-		    	if (posX_R1>=387 && posX===false)
+		    	if ((posX_R1>=387 && posX1===false) && $('#runner_1').length>0)
 		    	{
 		    		$("#runner_R1").hide();
 		    		$("#runner_1").css("display", "initial");
+		    		// Depurar
 		    		$("#runner_1").css("transform", "rotate(-180deg)");
 		    		$("#runner_1").css("-ms-transform", "rotate(-180deg)");
 		    		$("#runner_1").css("-webkit-transform", "rotate(-180deg)");
 		    	}
 
 
-		    	if (posX_R1>-44 && posX===false)
+		    	if (posX_R1>-44 && posX1===false)
 		    	{
 		    		posX_R1-= getRandomInt(1,5);
 
@@ -214,6 +208,8 @@
 
 		    		if (posX_R1<=-44)
 		    		{
+		    			console.log('Llegó el corredor 1');
+
 		    			chatSocket.send(JSON.stringify({
 				            'message': 'runner1 display3',
 				        }));
@@ -225,7 +221,7 @@
 
 		    	// Corredor 2
 
-		    	if (posX_R2>=387 && posX===false)
+		    	if ((posX_R2>=387 && posX2===false) && $('#runner_2').length>0)
 		    	{
 		    		$("#runner_R2").hide();
 		    		$("#runner_2").css("display", "initial");
@@ -235,7 +231,7 @@
 		    	}
 
 
-		    	if (posX_R2>-44 && posX===false)
+		    	if (posX_R2>-44 && posX2===false)
 		    	{
 		    		posX_R2-= getRandomInt(1,5);
 
@@ -244,6 +240,8 @@
 
 		    		if (posX_R2<=-44)
 		    		{
+		    			console.log('Llegó el corredor 2 '+posX_R2);
+
 		    			chatSocket.send(JSON.stringify({
 				            'message': 'runner2 display3',
 				        }));
@@ -254,7 +252,7 @@
 
 		    	// Corredor 3
 
-		    	if (posX_R3>=387 && posX===false)
+		    	if ((posX_R3>=387 && posX3===false) && $('#runner_3').length>0)
 		    	{
 		    		$("#runner_R3").hide();
 		    		$("#runner_3").css("display", "initial");
@@ -264,7 +262,7 @@
 		    	}
 
 
-		    	if (posX_R3>-44 && posX===false)
+		    	if (posX_R3>-44 && posX3===false)
 		    	{
 		    		posX_R3-= getRandomInt(1,5);
 
@@ -273,6 +271,8 @@
 
 		    		if (posX_R3<=-44)
 		    		{
+		    			console.log('Llegó el corredor 3 '+posX_R3);
+
 		    			chatSocket.send(JSON.stringify({
 				            'message': 'runner3 display3',
 				        }));
@@ -335,8 +335,8 @@
 
 	        			// Empezamos el relevo del corredor 1
 
-	        			posX= false;
-	        			posX_R1= 389;
+	        			posX1= false;
+	        			posX_R1= 387;
 
 	        		break;
 
@@ -344,8 +344,8 @@
 
 	        			// Empezamos el relevo del corredor 2
 
-	        			posX= false;
-	        			posX_R2= 389;
+	        			posX2= false;
+	        			posX_R2= 387;
 
 	        		break;
 
@@ -353,8 +353,8 @@
 
 	        			// Empezamos el relevo del corredor 3
 
-	        			posX= false;
-	        			posX_R3= 389;
+	        			posX3= false;
+	        			posX_R3= 387;
 
 	        		break;
 	        }
@@ -375,7 +375,7 @@
 	    		$('#DisplayDisconnect').modal('open');
 	    		runnerStart = false;
 
-	    		console.log($('#display').html());
+	    		//console.log($('#display').html());
 
 	    		if ($('#display').text()!=2)
 	    		{

@@ -43,6 +43,7 @@
 	    var runner1Rot2 = -120;
 	    var runner2Rot2 = -120;
 	    var runner3Rot2 = -120;
+	    var rotR1 = false;
 
 	    // Jquery
 
@@ -52,7 +53,7 @@
 	    	$('.modal').modal();
 		});
 
-    	setInterval(function(){runners()},15);
+    	setInterval(function(){runners()},50);
 	   	setInterval(function(){verificarConexion()},1500);
 	   	setInterval(function(){verificarConectividad()},2000);
 
@@ -167,8 +168,6 @@
 		    		// Posición.. Determinada por la velocidad ramdon en px 
 		    		posY_R1 += getRandomInt(1,5);
 
-		    		//console.log('Corredor queriendo correr'+ posY_R1);
-
 		    		$("#runner1").css("margin-bottom", posY_R1);
 		    		$("#runnerR1").css("margin-bottom", posY_R1);
 		    	}
@@ -197,7 +196,7 @@
 		    			/* Movimiento Eje Y. Rotacion 2 - Esquina superior */
 		    	
 		    	// Corredor 1		    	
-		    	if(posY_R1>=runner1RotY && posY_R1>=(runnerMaxPosY-100))
+		    	if(posY_R1>=runner1RotY && posY_R1<=(runnerMaxPosY-100))
 	    		{
 	    			$("#runner1").css("transform", "rotate("+runner1Rot2+"deg)");
 	    			$("#runner1").css("-ms-transform", "rotate("+runner1Rot2+"deg)");
@@ -234,15 +233,19 @@
 
 	    		// Corredor 1 
 
-	    		if ((posX_R1>=runnerMaxPosX2 && posY_R1>=(runnerMaxPosY-100)) && pos1X===false)
+	    		if ((posX_R1>=runnerMaxPosX2  && posY_R1>=(runnerMaxPosY-100)) && $('#runner1').length>0)
 		    	{
+		    		console.log('Corriendo en X');
+
 		    		posX_R1 -= getRandomInt(1,5);
 
 		    		$("#runner1").css("margin-left", posX_R1);
-		    		$("#runnerR1").css("margin-left", posY_R1);
+		    		//$("#runnerR1").css("margin-left", posX_R1);
 
 		    		if (posX_R1<=runnerMaxPosX2)
 		    		{
+		    			console.log('Llegó el corredor 1');
+
 		    			chatSocket.send(JSON.stringify({
 			            	'message': 'runner1 display1',
 				        }));
@@ -254,7 +257,7 @@
 
 		    	// Corredor 2 
 
-	    		if ((posX_R2>=runnerMaxPosX2 && posY_R2>=(runnerMaxPosY-100)) && pos2X===false)
+	    		if ((posX_R2>=runnerMaxPosX2 && posY_R2>=(runnerMaxPosY-50)) && $('#runner2').length>0)
 		    	{
 		    		posX_R2 -= getRandomInt(1,5);
 
@@ -263,6 +266,8 @@
 
 		    		if (posX_R2<=runnerMaxPosX2)
 		    		{
+		    			console.log('Llegó el corredor 2');
+
 		    			chatSocket.send(JSON.stringify({
 			            	'message': 'runner2 display1',
 				        }));
@@ -274,16 +279,17 @@
 
 		    	// Corredor 3 
 
-	    		if ((posX_R3>=runnerMaxPosX2 && posY_R3>=(runnerMaxPosY-100)) && pos3X===false)
+	    		if (posX_R3>=runnerMaxPosX2 && posY_R3>=runnerMaxPosY && $('#runner3').length>0)
 		    	{
 		    		posX_R3 -= getRandomInt(1,5);
 
 		    		$("#runner3").css("margin-left", posX_R3);
 		    		$("#runnerR3").css("margin-left", posY_R3);
 
-		    		
 		    		if (posX_R3<=runnerMaxPosX2)
 		    		{
+		    			console.log('Llegó el corredor 3');
+
 		    			chatSocket.send(JSON.stringify({
 			            	'message': 'runner3 display1',
 				        }));
@@ -291,8 +297,8 @@
 		    			$("#runner3").remove();
 		    			$("#runnerR3").remove();
 		    		}
-		    		
 		    	}
+
 
 	    	}
 	    }
