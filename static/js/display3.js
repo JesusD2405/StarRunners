@@ -16,23 +16,33 @@
 	    var pos1X = true;
 	    var pos2X = true;
 	    var pos3X = true;
-	    var runnerMaxPosX1 = -200;
-	    var runnerMaxPosY = 300;
-	    var runnerMaxPosX2 = -19;
+	    var runnerMaxPosX1 = -185;
+	    var runnerMaxPosY = -358;
+	    var runnerMaxPosX2 = 115;
 	    //Posición de los corredores en el eje X
 	    var posX_R1 = 110;
-		var posX_R2 = -150;
-		var posX_R3 = -150;
+		var posX_R2 = 110;
+		var posX_R3 = 110;
 		//Posición de los corredores en el eje Y
 	    var posY_R1 = -49;
 		var posY_R2 = -49;
 		var posY_R3 = -49;
 
-	    // Rotacion de la simulacion
-	    var runnerRotX = -149;
-	    var runnerRot1 = -195;
-	    var runnerRotY = -300;
-	    var runnerRot2 = -285;
+	    // Rotacion de la simulacion Eje X. Rotacion 1 - Esquina superior
+	    var runner1RotX = -29;
+	    var runner2RotX = -79;
+	    var runner3RotX = -129;
+	    var runner1Rot1 = -195;
+	    var runner2Rot1 = -195;
+	    var runner3Rot1 = -195;
+	    //var runnerRot1 = -195;
+	    // Rotacion de la simulacion. Eje Y. Rotacion 2 - Esquina inferior
+	    var runner1RotY = -198;
+	    var runner2RotY = -316;
+	    var runner3RotY = -405;
+	    var runner1Rot2 = -285;
+	    var runner2Rot2 = -285;
+	    var runner3Rot2 = -285;
 
 	    // Jquery
 
@@ -42,7 +52,7 @@
 	    	$('.modal').modal();
 		});
 
-    	setInterval(function(){runners()},15);
+    	setInterval(function(){runners()},25);
 	   	setInterval(function(){verificarConexion()},1500);
 	   	setInterval(function(){verificarConectividad()},2000);
 
@@ -55,26 +65,16 @@
 	    		/* Movimiento Eje X <- ida */
 
 	    		// Corredor 1
-		    	if (posX_R1>runnerMaxPosX1 && pos1X===true)
+		    	if (posX_R1>(runnerMaxPosX1+100) && pos1X===true)
 		    	{
-		    		$("#runnerR1").hide();
-
-		    		if (posX_R1 == 110 && pos1X===true)
-		    		{
-			    		$("#runner1").css("transform", "rotate(-180deg)");
-			    		$("#runner1").css("-ms-transform", "rotate(-180deg)");
-			    		$("#runner1").css("-webkit-transform", "rotate(-180deg)");
-		    		}
-
 		    		// Posición.. Determinada por la velocidad ramdon en px 
 		    		posX_R1-= getRandomInt(1,5);
 
 		    		$("#runner1").css("margin-left", posX_R1);
 		    		$("#runnerR1").css("margin-left", posX_R1);
-		    		$("#runner1").css("display", "initial");
 
 		    		// Movimiento Eje Y
-			    	if (posX_R1 <= runnerMaxPosX1)
+			    	if (posX_R1 <= (runnerMaxPosX1+100))
 			    	{
 			    		$("#runner1").css("margin-top", -10);
 			    		pos1X= false;
@@ -82,56 +82,36 @@
 		    	}
 
 		    	// Corredor 2
-		    	if (posX_R2>-150)
+		    	if (posX_R2>(runnerMaxPosX1+50) && pos2X===true)
 		    	{
-		    		$("#runnerR2").hide();
-
-		    		if (posX_R2 == 110)
-		    		{
-			    		$("#runner2").css("transform", "rotate(-180deg)");
-			    		$("#runner2").css("-ms-transform", "rotate(-180deg)");
-			    		$("#runner2").css("-webkit-transform", "rotate(-180deg)");
-		    		}
-
 		    		// Posición.. Determinada por la velocidad ramdon en px 
 		    		posX_R2-= getRandomInt(1,5);
 
 		    		$("#runner2").css("margin-left", posX_R2);
 		    		$("#runnerR2").css("margin-left", posX_R2);
-		    		$("#runner2").css("display", "initial");
 
 		    		// Movimiento Eje Y
-			    	if (posX_R2 == -150)
+			    	if (posX_R2 <= (runnerMaxPosX1+50))
 			    	{
 			    		$("#runner2").css("margin-top", -10);
-			    		posX= false;
+			    		pos2X= false;
 			    	}
 		    	}
 
 		    	// Corredor 3
-		    	if (posX_R3>-150)
+		    	if (posX_R3>runnerMaxPosX1 && pos3X===true)
 		    	{
-		    		$("#runnerR3").hide();
-
-		    		if (posX_R3 == 110)
-		    		{
-			    		$("#runner3").css("transform", "rotate(-180deg)");
-			    		$("#runner3").css("-ms-transform", "rotate(-180deg)");
-			    		$("#runner3").css("-webkit-transform", "rotate(-180deg)");
-		    		}
-
 		    		// Posición.. Determinada por la velocidad ramdon en px 
 		    		posX_R3-= getRandomInt(1,5);
 
 		    		$("#runner3").css("margin-left", posX_R3);
 		    		$("#runnerR3").css("margin-left", posX_R3);
-		    		$("#runner3").css("display", "initial");
 
 		    		// Movimiento Eje Y
-			    	if (posX_R3 == -150)
+			    	if (posX_R3 <= runnerMaxPosX1)
 			    	{
 			    		$("#runner3").css("margin-top", -10);
-			    		posX= false;
+			    		pos3X= false;
 			    	}
 		    	}
 
@@ -166,40 +146,40 @@
 
 		    	// Corredor 1
 
-		    	if (posX_R1>=runnerRotX && pos1X===true)
+		    	if (posX_R1<=runner1RotX && pos1X===true)
 		    	{
-		    		$("#runner1").css("transform", "rotate("+runnerRot1+"deg)");
-		    		$("#runner1").css("-ms-transform", "rotate("+runnerRot1+"deg)");
-		    		$("#runner1").css("-webkit-transform", "rotate("+runnerRot1+"deg)");
+		    		$("#runner1").css("transform", "rotate("+runner1Rot1+"deg)");
+		    		$("#runner1").css("-ms-transform", "rotate("+runner1Rot1+"deg)");
+		    		$("#runner1").css("-webkit-transform", "rotate("+runner1Rot1+"deg)");
 
-		    		runnerRotX += -10;
-		    		runnerRot1 += -15;
+		    		runner1RotX += -10;
+		    		runner1Rot1 += -15;
 
 		    		console.log('Rotando');
 		    	}
 
 		    	// Corredor 2
 
-		    	if ((posY_R2>-350 && posX_R2<=runnerRotX) && posY===true)
+		    	if (posX_R2<=runner2RotX && pos2X===true)
 		    	{
-		    		$("#runner1").css("transform", "rotate("+runnerRot1+"deg)");
-		    		$("#runner1").css("-ms-transform", "rotate("+runnerRot1+"deg)");
-		    		$("#runner1").css("-webkit-transform", "rotate("+runnerRot1+"deg)");
+		    		$("#runner2").css("transform", "rotate("+runner2Rot1+"deg)");
+		    		$("#runner2").css("-ms-transform", "rotate("+runner2Rot1+"deg)");
+		    		$("#runner2").css("-webkit-transform", "rotate("+runner2Rot1+"deg)");
 
-		    		runnerRotX += -10;
-		    		runnerRot1 += -15;
+		    		runner2RotX += -10;
+		    		runner2Rot1 += -15;
 		    	}
 
 		    	// Corredor 3
 
-		    	if ((posY_R3>-350 && posX_R3<=runnerRotX) && posY===true)
+		    	if (posX_R3<=runner3RotX && pos3X===true)
 		    	{
-		    		$("#runner1").css("transform", "rotate("+runnerRot1+"deg)");
-		    		$("#runner1").css("-ms-transform", "rotate("+runnerRot1+"deg)");
-		    		$("#runner1").css("-webkit-transform", "rotate("+runnerRot1+"deg)");
+		    		$("#runner3").css("transform", "rotate("+runner3Rot1+"deg)");
+		    		$("#runner3").css("-ms-transform", "rotate("+runner3Rot1+"deg)");
+		    		$("#runner3").css("-webkit-transform", "rotate("+runner3Rot1+"deg)");
 
-		    		runnerRotX += -10;
-		    		runnerRot1 += -15;
+		    		runner3RotX += -10;
+		    		runner3Rot1 += -15;
 		    	}
 
 		    	/*
@@ -218,45 +198,32 @@
 		    	/* Movimiento Eje Y */
 
 		    	// Corredor 1
-		    	if (posY_R1>-350 && posX_R1<=-150)
+		    	if (posY_R1>(runnerMaxPosY+100) && pos1X===false)
 		    	{
 		    		// Posición.. Determinada por la velocidad ramdon en px 
+		    		console.log('movimiento en Y');
 		    		posY_R1 -= getRandomInt(1,5);
 
 		    		$("#runner1").css("margin-bottom", posY_R1);
-
-		    		if (posY_R1 <= -350)
-			    	{
-			    		posY= false;
-			    	}
 		    	}
 
 		    	// Corredor 2
-		    	if (posY_R2>-350 && posX_R2<=-150)
+		    	if (posY_R2>-356 && pos2X===false)
 		    	{
 		    		// Posición.. Determinada por la velocidad ramdon en px 
 		    		posY_R2 -= getRandomInt(1,5);
 
 		    		$("#runner2").css("margin-bottom", posY_R2);
-
-		    		if (posY_R2 <= -350)
-			    	{
-			    		posY= false;
-			    	}
 		    	}
 
 		    	// Corredor 3
-		    	if (posY_R3>-350 && posX_R3<=-150)
+		    	if (posY_R3>-465 && pos3X===false)
 		    	{
 		    		// Posición.. Determinada por la velocidad ramdon en px 
+		    		console.log('corredor 3 movimiento en y');
 		    		posY_R3 -= getRandomInt(1,5);
 
 		    		$("#runner3").css("margin-bottom", posY_R3);
-
-		    		if (posY_R3 <= -350)
-			    	{
-			    		posY= false;
-			    	}
 		    	}
 
 		    	/*
@@ -277,48 +244,43 @@
 
 		    	*/
 
-		    	/* Movimiento Eje X. Rotacion 2 - Esquina inferior */
+		    	/* Movimiento Eje Y. Rotacion 2 - Esquina inferior */
 
 
 		    	// Corredor 1
-
-		    	/*
-
-		    	if ((posX_R1<143 && posY_R1>=runnerRotY) && posX===false)
+		    	if (posY_R1<=runner1RotY && posY_R1>=(runnerMaxPosY+100))
 		    	{
-		    		$("#runner1").css("transform", "rotate("+runnerRot2+"deg)");
-		    		$("#runner1").css("-ms-transform", "rotate("+runnerRot2+"deg)");
-		    		$("#runner1").css("-webkit-transform", "rotate("+runnerRot2+"deg)");
+		    		$("#runner1").css("transform", "rotate("+runner1Rot2+"deg)");
+		    		$("#runner1").css("-ms-transform", "rotate("+runner1Rot2+"deg)");
+		    		$("#runner1").css("-webkit-transform", "rotate("+runner1Rot2+"deg)");
 
-		    		runnerRotY += -10;
-		    		runnerRot2 += -15;
+		    		runner1RotY += -10;
+		    		runner1Rot2 += -15;
 		    	}
 
 		    	// Corredor 2
 
-		    	if ((posX_R2<143 && posY_R2>=runnerRotY) && posX===false)
+		    	if (posY_R2<=runner2RotY && posY_R2>=-356)
 		    	{
-		    		$("#runner2").css("transform", "rotate("+runnerRot2+"deg)");
-		    		$("#runner2").css("-ms-transform", "rotate("+runnerRot2+"deg)");
-		    		$("#runner2").css("-webkit-transform", "rotate("+runnerRot2+"deg)");
+		    		$("#runner2").css("transform", "rotate("+runner2Rot2+"deg)");
+		    		$("#runner2").css("-ms-transform", "rotate("+runner2Rot2+"deg)");
+		    		$("#runner2").css("-webkit-transform", "rotate("+runner2Rot2+"deg)");
 
-		    		runnerRotY += -10;
-		    		runnerRot2 += -15;
+		    		runner2RotY += -10;
+		    		runner2Rot2 += -15;
 		    	}
 
 		    	// Corredor 3
 
-		    	if ((posX_R3<143 && posY_R3>=runnerRotY) && posX===false)
+		    	if (posY_R3<=runner3RotY && posY_R3>=-465)
 		    	{
-		    		$("#runner3").css("transform", "rotate("+runnerRot2+"deg)");
-		    		$("#runner3").css("-ms-transform", "rotate("+runnerRot2+"deg)");
-		    		$("#runner3").css("-webkit-transform", "rotate("+runnerRot2+"deg)");
+		    		$("#runner3").css("transform", "rotate("+runner3Rot2+"deg)");
+		    		$("#runner3").css("-ms-transform", "rotate("+runner3Rot2+"deg)");
+		    		$("#runner3").css("-webkit-transform", "rotate("+runner3Rot2+"deg)");
 
-		    		runnerRotY += -10;
-		    		runnerRot2 += -15;
+		    		runner3RotY += -10;
+		    		runner3Rot2 += -15;
 		    	}
-
-		    	*/
 
 		    	/*
 		    	if ((runnerPosX<143 && runnerPosY==runnerRotY) && posX===false)
@@ -335,20 +297,50 @@
 		    	/* Movimiento Eje X -> vuelta */ 
 
 		    	// Corredor 1
-		    	if ((posX_R1<143 && posY_R1>=-350) && pos1X===false)
+		    	if ((posX_R1<runnerMaxPosX2 && posY_R1<=(runnerMaxPosY+100)) && pos1X===false)
 		    	{
 		    		// Posición.. Determinada por la velocidad ramdon en px 
 		    		posX_R1 += getRandomInt(1,5);
 
 		    		$("#runner1").css("margin-left", posX_R1);
 
-		    		if (posX_R1>=142)
+		    		if (posX_R1>=runnerMaxPosX2)
 		    		{
-		    			chatSocket.send(JSON.stringify({
-			            	'message': 'runner1 display1',
-				        }));
+		    			console.log('Corredor 1 Termino');
 
 		    			$("#runner1").hide();	
+		    		}
+		    	}
+
+		    	// Corredor 2
+		    	if ((posX_R2<runnerMaxPosX2 && posY_R2<=-356) && pos2X===false)
+		    	{
+		    		// Posición.. Determinada por la velocidad ramdon en px 
+		    		posX_R2 += getRandomInt(1,5);
+
+		    		$("#runner2").css("margin-left", posX_R2);
+
+		    		if (posX_R2>=runnerMaxPosX2)
+		    		{
+		    			console.log('Corredor 2 Termino');
+
+		    			$("#runner2").hide();	
+		    		}
+		    	}
+
+		    	// Corredor 3
+		    	if ((posX_R3<runnerMaxPosX2 && posY_R3<=-465) && pos3X===false)
+		    	{
+		    		// Posición.. Determinada por la velocidad ramdon en px 
+		    		posX_R3 += getRandomInt(1,5);
+
+		    		$("#runner3").css("margin-left", posX_R3);
+
+		    		if (posX_R3>=runnerMaxPosX2)
+		    		{
+		    			console.log('Corredor 3 Termino');
+
+		    			$("#runner3").hide();	
 		    		}
 		    	}
 
@@ -444,8 +436,14 @@
 
 	        	case 'runner1 display3':
 
+	        			console.log('Mensaje recibido. Corredor 1 empieza a correr');
 	        			runnerStart= true;
 	        			runnerStatus= true;
+	        			$("#runnerR1").hide();
+			    		  $("#runner1").css("transform", "rotate(-180deg)");
+			    		  $("#runner1").css("-ms-transform", "rotate(-180deg)");
+			    		  $("#runner1").css("-webkit-transform", "rotate(-180deg)");
+			    		  $("#runner1").css("display", "initial");
 	        			//posX_R1= 110;
 
 	        		break;
@@ -454,6 +452,11 @@
 
 	        			runnerStart= true;
 	        			runnerStatus= true;
+	        			$("#runnerR2").hide();
+				    		$("#runner2").css("transform", "rotate(-180deg)");
+				    		$("#runner2").css("-ms-transform", "rotate(-180deg)");
+				    		$("#runner2").css("-webkit-transform", "rotate(-180deg)");
+				    		$("#runner2").css("display", "initial");
 	        			//posX_R2= 110;
 
 	        		break;
@@ -462,6 +465,11 @@
 
 	        			runnerStart= true;
 	        			runnerStatus= true;
+	        			$("#runnerR3").hide();
+				    		$("#runner3").css("transform", "rotate(-180deg)");
+				    		$("#runner3").css("-ms-transform", "rotate(-180deg)");
+				    		$("#runner3").css("-webkit-transform", "rotate(-180deg)");
+				    		$("#runner3").css("display", "initial");
 	        			//posX_R3= 110;
 
 	        		break;

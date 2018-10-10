@@ -54,7 +54,7 @@
 	    	$('.modal').modal();
 		});
 
-    	setInterval(function(){runners()},15);
+    	setInterval(function(){runners()},25);
 	   	setInterval(function(){verificarConexion()},1500);
 	   	setInterval(function(){verificarConectividad()},2000);
 

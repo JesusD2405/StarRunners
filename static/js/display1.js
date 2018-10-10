@@ -29,6 +29,8 @@
 
 				runnerStart = true;
 
+				
+
 				if (posX1===true)
 				{
 					$("#runnerR1").hide();
@@ -49,6 +51,8 @@
 				chatSocket.send(JSON.stringify({
 		            'message': 'Play'
 		        }));
+
+		    
 			});
 
 
@@ -84,7 +88,7 @@
 	  
 	    /* Funciones que se ejecutan segun un tiempo determinado */
 
-	    setInterval(function(){runners()},15);
+	    setInterval(function(){runners()},25);
 	    setInterval(function(){verificarConexion()},1500);
 	    setInterval(function(){verificarConectividad()},2000);
 
