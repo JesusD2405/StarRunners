@@ -218,7 +218,7 @@
 				            'message': 'runner1 display3',
 				        }));
 
-		    			$("#runner_1").hide();
+		    			$("#runner_1").remove();
 		    		}
 
 		    	}
@@ -244,13 +244,13 @@
 
 		    		if (posX_R2<=-44)
 		    		{
-		    			console.log('Llegó el corredor 2 '+posX_R2);
+		    			console.log('Llegó el corredor 2 ');
 
 		    			chatSocket.send(JSON.stringify({
 				            'message': 'runner2 display3',
 				        }));
 
-		    			$("#runner_2").hide();
+		    			$("#runner_2").remove();
 		    		}
 		    	}
 
@@ -275,13 +275,13 @@
 
 		    		if (posX_R3<=-44)
 		    		{
-		    			console.log('Llegó el corredor 3 '+posX_R3);
+		    			console.log('Llegó el corredor 3 ');
 
 		    			chatSocket.send(JSON.stringify({
 				            'message': 'runner3 display3',
 				        }));
 
-		    			$("#runner_3").hide();
+		    			$("#runner_3").remove();
 		    		}
 		    	}
 

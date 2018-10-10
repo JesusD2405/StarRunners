@@ -236,8 +236,6 @@
 
 	    		if ((posX_R1>=runnerMaxPosX2  && posY_R1>=(runnerMaxPosY-100)) && $('#runner1').length>0)
 		    	{
-		    		console.log('Corriendo en X');
-
 		    		posX_R1 -= getRandomInt(1,5);
 
 		    		$("#runner1").css("margin-left", posX_R1);

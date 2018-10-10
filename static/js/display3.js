@@ -8,14 +8,15 @@
 	    // Movimiento de la simulacion
 	    var runnerStart = false;
 	    var runnerStatus = false;
-	    //var runnerPosX = 110;
-	    //var runnerPosY = -49;
-	    //var posX = true;
-	    //var posY = true;
 	    var runnerDisplay = 1;
 	    var pos1X = true;
 	    var pos2X = true;
 	    var pos3X = true;
+	    //Optimizar
+	    var posR1X = false;
+	    var posR2X = false;
+	    var posR3X = false;
+	    //
 	    var runnerMaxPosX1 = -185;
 	    var runnerMaxPosY = -358;
 	    var runnerMaxPosX2 = 115;
@@ -65,7 +66,7 @@
 	    		/* Movimiento Eje X <- ida */
 
 	    		// Corredor 1
-		    	if (posX_R1>(runnerMaxPosX1+100) && pos1X===true)
+		    	if (posX_R1>(runnerMaxPosX1+100) && (pos1X===true && posR1X===true))
 		    	{
 		    		// Posición.. Determinada por la velocidad ramdon en px 
 		    		posX_R1-= getRandomInt(1,5);
@@ -82,7 +83,7 @@
 		    	}
 
 		    	// Corredor 2
-		    	if (posX_R2>(runnerMaxPosX1+50) && pos2X===true)
+		    	if (posX_R2>(runnerMaxPosX1+50) && (pos2X===true && posR2X===true))
 		    	{
 		    		// Posición.. Determinada por la velocidad ramdon en px 
 		    		posX_R2-= getRandomInt(1,5);
@@ -99,7 +100,7 @@
 		    	}
 
 		    	// Corredor 3
-		    	if (posX_R3>runnerMaxPosX1 && pos3X===true)
+		    	if (posX_R3>runnerMaxPosX1 && (pos3X===true && posR3X===true))
 		    	{
 		    		// Posición.. Determinada por la velocidad ramdon en px 
 		    		posX_R3-= getRandomInt(1,5);
@@ -154,8 +155,6 @@
 
 		    		runner1RotX += -10;
 		    		runner1Rot1 += -15;
-
-		    		console.log('Rotando');
 		    	}
 
 		    	// Corredor 2
@@ -201,7 +200,6 @@
 		    	if (posY_R1>(runnerMaxPosY+100) && pos1X===false)
 		    	{
 		    		// Posición.. Determinada por la velocidad ramdon en px 
-		    		console.log('movimiento en Y');
 		    		posY_R1 -= getRandomInt(1,5);
 
 		    		$("#runner1").css("margin-bottom", posY_R1);
@@ -220,7 +218,6 @@
 		    	if (posY_R3>-465 && pos3X===false)
 		    	{
 		    		// Posición.. Determinada por la velocidad ramdon en px 
-		    		console.log('corredor 3 movimiento en y');
 		    		posY_R3 -= getRandomInt(1,5);
 
 		    		$("#runner3").css("margin-bottom", posY_R3);
@@ -439,38 +436,45 @@
 	        			console.log('Mensaje recibido. Corredor 1 empieza a correr');
 	        			runnerStart= true;
 	        			runnerStatus= true;
+	        			posR1X= true;
 	        			$("#runnerR1").hide();
-			    		  $("#runner1").css("transform", "rotate(-180deg)");
-			    		  $("#runner1").css("-ms-transform", "rotate(-180deg)");
-			    		  $("#runner1").css("-webkit-transform", "rotate(-180deg)");
-			    		  $("#runner1").css("display", "initial");
-	        			//posX_R1= 110;
+						$("#runner1").css("transform", "rotate(-180deg)");
+						$("#runner1").css("-ms-transform", "rotate(-180deg)");
+						$("#runner1").css("-webkit-transform", "rotate(-180deg)");
+						$("#runner1").css("display", "initial");
+						
 
 	        		break;
 
 	        	case 'runner2 display3':
 
+	        			console.log('Mensaje recibido. Corredor 2 empieza a correr');
+
 	        			runnerStart= true;
 	        			runnerStatus= true;
+	        			posR2X= true;
 	        			$("#runnerR2").hide();
-				    		$("#runner2").css("transform", "rotate(-180deg)");
-				    		$("#runner2").css("-ms-transform", "rotate(-180deg)");
-				    		$("#runner2").css("-webkit-transform", "rotate(-180deg)");
-				    		$("#runner2").css("display", "initial");
-	        			//posX_R2= 110;
+			    		$("#runner2").css("transform", "rotate(-180deg)");
+			    		$("#runner2").css("-ms-transform", "rotate(-180deg)");
+			    		$("#runner2").css("-webkit-transform", "rotate(-180deg)");
+			    		$("#runner2").css("display", "initial");
+			    		
 
 	        		break;
 
 	        	case 'runner3 display3':
 
+	        			console.log('Mensaje recibido. Corredor 3 empieza a correr');
+
 	        			runnerStart= true;
 	        			runnerStatus= true;
+	        			posR3X= true;
 	        			$("#runnerR3").hide();
-				    		$("#runner3").css("transform", "rotate(-180deg)");
-				    		$("#runner3").css("-ms-transform", "rotate(-180deg)");
-				    		$("#runner3").css("-webkit-transform", "rotate(-180deg)");
-				    		$("#runner3").css("display", "initial");
-	        			//posX_R3= 110;
+			    		$("#runner3").css("transform", "rotate(-180deg)");
+			    		$("#runner3").css("-ms-transform", "rotate(-180deg)");
+			    		$("#runner3").css("-webkit-transform", "rotate(-180deg)");
+			    		$("#runner3").css("display", "initial");
+			    		
 
 	        		break;
 	        }
